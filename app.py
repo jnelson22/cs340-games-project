@@ -5,7 +5,6 @@ app = Flask(__name__, static_folder='games-ui/build', static_url_path='')
 cors = CORS(app)
 
 @app.route('/')
-@cross_origin
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
