@@ -4,8 +4,17 @@ import { Link } from 'react-router-dom';
 function GameCategoriesPage() {
     return (
         <>
-            <h1>Game Categories Page</h1>
-                <Link className="App-link" to="/">Go to the Home Page</Link>
+            <h1>Game Categories</h1>
+            <div className="gameCatTable">
+                <table>
+                    <caption>Types of Games</caption>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>    
         </>
     );
 }
