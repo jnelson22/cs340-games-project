@@ -7,6 +7,7 @@ function GamesPage() {
             <h1>Games Page</h1>
                 <Link className="App-link" to="/">Go to the Home Page</Link>
         </>
+        
     );
 }
 
