@@ -18,7 +18,7 @@ function GamesPage() {
                 </table>
             </div>
             <div>
-                <h2>Add Game</h2>
+                <h2>Add or Edit Game</h2>
                 <input
                     type="text"
                     placeholder="Game Name"
@@ -32,6 +32,7 @@ function GamesPage() {
                     placeholder="Max # of Players"
                 />
                 <button>Add</button>
+                <button>Edit</button>
             </div>
         </>
 
