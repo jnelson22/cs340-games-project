@@ -6,11 +6,12 @@ import GamesPage from './pages/GamesPage';
 import GameCategoriesPage from './pages/GameCategoriesPage';
 import PlayersPage from './pages/PlayersPage';
 import ScoresPage from './pages/ScoresPage';
+import Navigator from './components/navigation';
 
 function App() {
   return (
     <Router>
-      {/* <Navigator /> */}
+      <Navigator />
       <main>
         <Route path="/" exact>
             <HomePage />
