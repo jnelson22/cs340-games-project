@@ -26,7 +26,7 @@ function PlayersPage() {
                     <tr>
                         <td colSpan="5"> 
                             <button className="add-button">Add</button>
-
+                            <button className="add-button">Edit</button>
                         </td>
                     </tr>
                 </tbody>
