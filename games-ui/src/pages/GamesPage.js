@@ -6,6 +6,36 @@ function GamesPage() {
         <>
             <h1>Games Page</h1>
                 <Link className="App-link" to="/">Go to the Home Page</Link>
+            <h1>Games</h1>
+            <div>
+                <table className="table-container">
+                    <caption>Available Games</caption>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Minimum number of players</th>
+                            <th>Maximum number of players</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div>
+                <h2>Add or Edit Game</h2>
+                <input
+                    type="text"
+                    placeholder="Game Name"
+                />
+                <input
+                    type="number"
+                    placeholder="Min # of Players"
+                />
+                <input
+                    type="number"
+                    placeholder="Max # of Players"
+                />
+                <button>Add</button>
+                <button>Edit</button>
+            </div>
         </>
     );
 }
