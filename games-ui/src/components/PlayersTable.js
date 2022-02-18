@@ -1,5 +1,6 @@
 import React from 'react';
 import PlayersTableHead from './PlayersTableHead';
+import { FiEdit2, FiDelete } from 'react-icons/fi';
 
 function PlayersTable () {
     return (
@@ -9,15 +10,15 @@ function PlayersTable () {
                 <td>Jeff</td>
                 <td>Nelson</td>
                 <td>Catan</td>
-                <td><button className="add-button">Edit</button></td>
-                <td><button className="add-button">Delete</button></td>
+                <td><FiEdit2 /></td>
+                <td><FiDelete /></td>
             </tr>
             <tr className='player-row'>
                 <td>Margaret</td>
                 <td>Swarts</td>
                 <td></td>
-                <td><button className="add-button">Edit</button></td>
-                <td><button className="add-button">Delete</button></td>
+                <td><FiEdit2 /></td>
+                <td><FiDelete /></td>
             </tr>
         </table>
     )
