@@ -22,6 +22,13 @@ function GamesTable () {
                     <td><FiEdit2 /></td>
                     <td><FiDelete /></td>
                 </tr>
+                <tr>
+                    <td>Settlers of Catan</td>
+                    <td>3</td>
+                    <td>6</td>
+                    <td><FiEdit2 /></td>
+                    <td><FiDelete /></td>
+                </tr>
             </tbody>
         </table>
     )
