@@ -7,7 +7,7 @@ function PlayersPage() {
     return (
         <>
             <h1>Players Page</h1>
-            <table className="table-container">
+            <table className="table-search">
                 <tr>
                     <td>
                         <input type="text" placeholder='First'/>
@@ -27,7 +27,7 @@ function PlayersPage() {
             <PlayersTable />
             <hr></hr>
             <table className="table-edit">
-                <PlayersTableHead />
+                <PlayersTableHead input="player-add"/>
                 <tbody>
                     <tr className="input-table">
                         <td className="input-table">
@@ -43,7 +43,7 @@ function PlayersPage() {
                     <tr>
                         <td colSpan="5"> 
                             <button className="add-button">Add</button>
-                            <button className="add-button">Edit</button>
+                            
                         </td>
                     </tr>
                 </tbody>
