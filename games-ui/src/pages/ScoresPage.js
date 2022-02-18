@@ -8,10 +8,24 @@ function ScoresPage() {
     return (
         <>
             <h1>Scores Page</h1>
+            <table className="table-search">
+                <tr>
+                    <td>
+                        <input type="text" placeholder='Player Name'/>
+                    </td>
+                    <td>
+                        <input type="text" placeholder='Game'/>
+                    </td>
+                    <td>
+                        <button>Search</button>
+                    </td>
+                </tr>
+            </table>
+            <br></br>
             <ScoresTable />
             <hr></hr>
             <table className="table-edit">
-                <ScoresTableHead />
+                <ScoresTableHead input="score-add"/>
                 <tbody>
                     <tr className="input-table">
                         <td className="input-table">
@@ -29,16 +43,11 @@ function ScoresPage() {
                         <td className="input-table">
                             <input type="text" />
                         </td>
-                        <td className="input-table">
-                            <input type="checkbox" />
-                        </td>
                     </tr>
                     <tr>
                         <td colSpan="4"> 
                             <button className="add-button">Add</button>
-                            <button className="add-button">Update</button>
                         </td>
-
                     </tr>
                 </tbody>
             </table>
