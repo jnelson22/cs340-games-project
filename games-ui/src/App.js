@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import GamesPage from './pages/GamesPage';
 import GameCategoriesPage from './pages/GameCategoriesPage';
+import GamesGameCatPage from './pages/GamesGameCatPage';
 import PlayersPage from './pages/PlayersPage';
 import ScoresPage from './pages/ScoresPage';
 import GameSearchPage from './pages/GameSearchPage';
