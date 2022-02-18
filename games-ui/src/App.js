@@ -6,6 +6,7 @@ import GamesPage from './pages/GamesPage';
 import GameCategoriesPage from './pages/GameCategoriesPage';
 import PlayersPage from './pages/PlayersPage';
 import ScoresPage from './pages/ScoresPage';
+import GameSearchPage from './pages/GameSearchPage';
 import Navigator from './components/navigation';
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/scores" exact>
           <ScoresPage />
+        </Route>
+        <Route path="/game-search" exact>
+          <GameSearchPage />
         </Route>
       </main>
     </Router>
