@@ -30,11 +30,28 @@ nav a {
   margin-right: auto;
 }
 
+.table-search {
+  padding: 20px;
+  width: 80%;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .table-edit {
   padding: 20px;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+}
+
+th.table-home-header, td.home-data, tr.player-row {
+  border-collapse: collapse;
+  border: 2px solid black;
+}
+
+tr.player-row:hover {
+  background: #9c9c9c;
 }
 
 @media (prefers-reduced-motion: no-preference) {
