@@ -1,5 +1,6 @@
 import React from 'react';
 import ScoresTableHead from './ScoresTableHead';
+import { FiEdit2, FiDelete } from 'react-icons/fi';
 
 function ScoresTable () {
     return (
@@ -11,16 +12,16 @@ function ScoresTable () {
                 <td>Catan</td>
                 <td>35</td>
                 <td><input type="checkbox" checked/></td>
-                <td><button className="add-button">Edit</button></td>
-                <td><button className="add-button">Delete</button></td>
+                <td><FiEdit2 /></td>
+                <td><FiDelete /></td>
             </tr>
             <tr className='player-row'>
                 <td>Margaret Swarts</td>
                 <td>Checkers</td>
                 <td></td>
                 <td><input type="checkbox"/></td>
-                <td><button className="add-button">Edit</button></td>
-                <td><button className="add-button">Delete</button></td>
+                <td><FiEdit2 /></td>
+                <td><FiDelete /></td>
             </tr>
         </table>
     )
