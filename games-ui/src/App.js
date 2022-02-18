@@ -24,8 +24,8 @@ function App() {
         <Route path="/game-categories" exact>
           <GameCategoriesPage />
         </Route>
-        <Route path="/game-game-categories" exact>
-          <GamesGameCatpage />
+        <Route path="/games-game-categories" exact>
+          <GamesGameCatPage />
         </Route>
         <Route path="/players" exact>
           <PlayersPage />

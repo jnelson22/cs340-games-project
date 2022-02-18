@@ -5,7 +5,7 @@ import GamesGameCatTable from '../components/GamesGameCatTable';
 function GamesGameCatPage() {
     return (
         <>
-            <h1>Games</h1>
+            <h1>Games and Game Categories Intersection Table</h1>
             <GamesGameCatTable />
         </>
     );
