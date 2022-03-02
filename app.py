@@ -7,6 +7,14 @@ app = Flask(__name__, static_folder='games-ui/build', static_url_path='')
 cors = CORS(app)
 api = Api(app)
 
+#app.config
+
+# define database
+# db = JawsDB???
+
+class Event(db.model):
+    id = db.Column(db.int, )
+
 @app.route('/')
 def serve():
     return send_from_directory(app.static_folder, 'index.html')

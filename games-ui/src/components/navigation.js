@@ -10,7 +10,6 @@ function Navigator() {
             <Link className="App-link" to="/games-game-categories">Games_Game_Categories</Link>
             <Link className="App-link" to="/players">Players</Link>
             <Link className="App-link" to="/scores">Scores</Link>
-            <Link className='App-link' to="/game-search">Game Search</Link>
         </nav>
   );
 }
