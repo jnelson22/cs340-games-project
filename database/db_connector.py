@@ -7,10 +7,16 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 # Set the variables in our application with those environment variables
-host = os.environ.get("db_host")
-user = os.environ.get("db_username")
-passwd = os.environ.get("db_pass")
-db = os.environ.get("db_name")
+if os.environ.get('ENV') == 'production':
+    host = os.environ.get("db_host")
+    user = os.environ.get("db_username")
+    passwd = os.environ.get("db_pass")
+    db = os.environ.get("db_name")
+else:
+    host = os.environ.get("db_host")
+    user = os.environ.get("db_username")
+    passwd = os.environ.get("db_pass")
+    db = os.environ.get("db_name")
 
 def connect_to_database(host = host, user = user, passwd = passwd, db = db):
     '''
