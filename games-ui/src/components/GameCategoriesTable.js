@@ -6,28 +6,28 @@ function GameCategoriesTable () {
         <table className="table-container">
             <GameCategoriesTableHead />
             <tbody>
-                <tr>
+                <tr className='category-row'>
                     <td>card</td>
                 </tr>
-                <tr>
+                <tr className='category-row'>
                     <td>board</td>
                 </tr>
-                <tr>
+                <tr className='category-row'>
                     <td>dice</td>
                 </tr>
-                <tr>
+                <tr className='category-row'>
                     <td>role-playing</td>
                 </tr>
-                <tr>
+                <tr className='category-row'>
                     <td>strategy</td>
                 </tr>
-                <tr>
+                <tr className='category-row'>
                     <td>tile-based</td>
                 </tr>
-                <tr>
+                <tr className='category-row'>
                     <td>deterministic</td>
                 </tr>
-                <tr>
+                <tr className='category-row'>
                     <td>stochastic</td>
                 </tr>
             </tbody>
