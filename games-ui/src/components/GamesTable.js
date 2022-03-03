@@ -7,7 +7,7 @@ function GamesTable ({games}) {
         <table className="table-container">
             <GamesTableHead />
             <tbody>
-                {games.map((game) => (
+                {games.map((game, i) => (
                     <tr className='game-row'>
                         <td>{game.name}</td>
                         <td>{game.min_number_player}</td>
@@ -15,7 +15,8 @@ function GamesTable ({games}) {
                         <td><FiEdit2 /></td>
                         <td><FiDelete /></td>
                     </tr>
-                ))}
+                )
+                )}
             </tbody>
         </table>
     )
