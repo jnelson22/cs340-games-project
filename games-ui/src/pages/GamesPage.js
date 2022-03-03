@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import GamesTable from '../components/GamesTable';
 import GamesTableHead from '../components/GamesTableHead';
 import {useState, useEffect } from 'react';
 
 function GamesPage() {
-    const [games, setGames] = useState([])
+    const [games, setGames] = useState([]);
+    const history = useHistory();
 
     const loadGames = async () => {
         const response = await fetch('/api/games');
