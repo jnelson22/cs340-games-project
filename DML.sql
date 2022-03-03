@@ -8,13 +8,15 @@ INSERT INTO Game_Categories (category) VALUES (:categoryInput);
 INSERT INTO Players (first_name, last_name) VALUES (:fnameInput, :lnameInput);
 
 -- query to search for a player
-SELECT :fnameInput, :lnameInput, :favegameInput FROM Players;
+SELECT :Players.fnameInput, :Players.lnameInput, :Games.favegameInput FROM Players
+INNER JOIN Games
+ON Players:favoriteGame = Games.gameID;
 
 -- query to search for a score
 SELECT :playerNameInput, :gameInput FROM Scores;
 
 -- query to add a score
-INSERT INTO Scores (score) VALUES (:scoreInput);
+INSERT INTO Scores (score) VALUES (:gameidInput, :scoreidInput, :scoreInput);
 
 -- query to search for a game
 SELECT :gameNameInput, :minPlayersInput, :maxplayersInput FROM Game;
