@@ -2,8 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import GamesTable from '../components/GamesTable';
 import GamesTableHead from '../components/GamesTableHead';
+import {useState, useEffect } from 'react';
 
 function GamesPage() {
+    const [games, setGames] = useState([])
+
+    const loadGames = async () => {
+        const response = await fetch('/api/games');
+        const data = await response.json();
+        setGames(data);
+    }
+
+    useEffect(() => {
+        loadGames();
+    }, []);
+
     return (
         <>
             <h1>Games Page</h1>
@@ -35,7 +48,7 @@ function GamesPage() {
                 </table>
             </div>
             <br></br>
-            <GamesTable />
+            <GamesTable games={games}/>
             <hr></hr>
             <div>
                 <table className="table-edit">
