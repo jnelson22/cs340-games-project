@@ -51,24 +51,34 @@ CREATE TABLE `Games_Game_Categories` (
 
 ALTER TABLE `Players`
     ADD CONSTRAINT `fave_game` 
-        FOREIGN KEY (`favorite_game`) REFERENCES `Games` (`gameID`);
+        FOREIGN KEY (`favorite_game`) REFERENCES `Games` (`gameID`)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE;
 
 ALTER TABLE `Scores` 
     ADD CONSTRAINT `score_game` 
-        FOREIGN KEY (`gameID`) REFERENCES `Games` (`gameID`);
+        FOREIGN KEY (`gameID`) REFERENCES `Games` (`gameID`)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE;
 
 ALTER TABLE `Scores` 
     ADD CONSTRAINT `score_player` 
-        FOREIGN KEY (`playerID`) REFERENCES `Players` (`playerID`);
+        FOREIGN KEY (`playerID`) REFERENCES `Players` (`playerID`)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE;
 
 
 ALTER TABLE `Games_Game_Categories`
     ADD CONSTRAINT `FK_game_id`
-        FOREIGN KEY (`gameID`) REFERENCES `Games` (`gameID`);
+        FOREIGN KEY (`gameID`) REFERENCES `Games` (`gameID`)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE;
 
 ALTER TABLE `Games_Game_Categories`
     ADD CONSTRAINT `FK_category_id`
-        FOREIGN KEY (`categoryID`) REFERENCES `Game_Categories` (`game_categoryID`);
+        FOREIGN KEY (`categoryID`) REFERENCES `Game_Categories` (`game_categoryID`)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE;
 
 INSERT INTO Games (name, min_number_player, max_number_player) VALUES ('Risk', 2, 6);
 INSERT INTO Games (name, min_number_player, max_number_player) VALUES ('Checkers', 2, 2);
