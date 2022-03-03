@@ -1,9 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import GameCategoriesTable from '../components/GameCategoriesTable';
 import GameCategoriesTableHead from '../components/GameCategoriesTableHead';
+import {useState, useEffect} from 'react';
 
 function GameCategoriesPage() {
+    const [gameCategories, setGameCategories] = useState([]);
+    const history = useHistory();
+
+    const loadGameCategories = async () => {
+        const response = await fetch('/api/gameCategories');
+        const data = await response.json();
+        setGameCategories(data);
+    }
+
+    useEffect(() => {
+        loadGameCategories();
+    }, []);
+    
     return (
         <>
             <h1>Game Categories</h1>
