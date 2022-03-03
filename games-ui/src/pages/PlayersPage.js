@@ -1,9 +1,23 @@
 import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import PlayersTable from '../components/PlayersTable';
 import PlayersTableHead from '../components/PlayersTableHead';
+import { useState, useEffect } from 'react';
 
 
 function PlayersPage() {
+    const [players, setPlayers] = useState([]);
+    const history = useHistory();
+
+    const loadPlayers = async () => {
+        const response = await fetch('/api/players');
+        const data = await response.json();
+        setPlayers(data);
+    }
+
+    useEffect(() => {
+        loadPlayers();
+    }, []);
     return (
         <>
             <h1>Players Page</h1>
