@@ -83,6 +83,6 @@ INSERT INTO Players (first_name, last_name) VALUES ('Tom', 'Smith');
 INSERT INTO Players (first_name, last_name) VALUES ('LeBron', 'James');
 INSERT INTO Players (first_name, last_name) VALUES ('Doris', 'Day');
 
-INSERT INTO Scores (gameID, score) VALUES (1, 29);
-INSERT INTO Scores (gameID, score) VALUES (2, 100);
-INSERT INTO Scores (gameID, score) VALUES (3, 250);
+INSERT INTO Scores (gameID, score, playerID) VALUES (1, 29, 1);
+INSERT INTO Scores (gameID, score, playerID) VALUES (2, 100, 3);
+INSERT INTO Scores (gameID, score, playerID) VALUES (3, 250, 2);

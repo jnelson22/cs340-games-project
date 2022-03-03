@@ -5,24 +5,23 @@ import { FiEdit2, FiDelete } from 'react-icons/fi';
 function GamesTable () {
     return (
         <table className="table-container">
-            <caption>Available Games</caption>
             <GamesTableHead />
             <tbody>
-                <tr>
+                <tr className='game-row'>
                     <td>Risk</td>
                     <td>2</td>
                     <td>6</td>
                     <td><FiEdit2 /></td>
                     <td><FiDelete /></td>
                 </tr>
-                <tr>
+                <tr className='game-row'>
                     <td>Checkers</td>
                     <td>2</td>
                     <td>2</td>
                     <td><FiEdit2 /></td>
                     <td><FiDelete /></td>
                 </tr>
-                <tr>
+                <tr className='game-row'>
                     <td>Settlers of Catan</td>
                     <td>3</td>
                     <td>6</td>
