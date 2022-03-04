@@ -36,7 +36,7 @@ function ScoresPage() {
                 </tr>
             </table>
             <br></br>
-            <ScoresTable />
+            <ScoresTable scores={scores}/>
             <hr></hr>
             <table className="table-edit">
                 <ScoresTableHead input="score-add"/>
