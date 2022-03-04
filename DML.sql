@@ -13,7 +13,7 @@ INNER JOIN Games
 ON Players:favoriteGame = Games.gameID;
 
 -- query to search for a score
-SELECT :playerNameInput, :gameInput FROM Scores;
+SELECT :Players.full_nameInput, :gameInput FROM Scores;
 
 -- query to add a score
 INSERT INTO Scores (score) VALUES (:gameidInput, :scoreidInput, :scoreInput);

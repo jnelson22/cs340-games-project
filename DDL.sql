@@ -33,6 +33,7 @@ CREATE TABLE `Players` (
     `first_name` varchar(100) NOT NULL,
     `last_name` varchar(100) NOT NULL,
     `favorite_game` int(11),
+    CONSTRAINT full_name UNIQUE (`first_name`, `last_name`),
     PRIMARY KEY (`playerID`)
 );
 
