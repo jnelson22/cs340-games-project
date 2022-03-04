@@ -49,7 +49,7 @@ def player():
         return redirect('/players')
 
 @app.route('/api/game-categories', methods=["POST", "GET"])
-def player():
+def game_cat():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
         query = "SELECT * from Game_Categories;"
@@ -64,7 +64,7 @@ def player():
         return redirect('/game-categories')
 
 @app.route('/api/scores', methods=["POST", "GET"])
-def player():
+def scores():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
         #TODO: need to update with a join for the games and players table to get text not just the IDs

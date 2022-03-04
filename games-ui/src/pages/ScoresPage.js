@@ -11,7 +11,7 @@ function ScoresPage() {
     const history = useHistory();
 
     const loadScores = async () => {
-        const response =await fetch('/api/games');
+        const response =await fetch('/api/scores');
         const data = await response.json();
         setScores(data);
     }
