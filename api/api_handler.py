@@ -14,3 +14,16 @@ class GamesApiHandler(Resource):
         results = cursor.fetchall()
         print(results)
         return results
+
+    def post(self):
+        print(self)
+        
+        parser = reqparse.RequestParser()
+        # parser.add_argument('type', type=str)
+        parser.add_argument('body')
+
+        args = parser.parse_args()
+
+        print(args)
+
+        return
