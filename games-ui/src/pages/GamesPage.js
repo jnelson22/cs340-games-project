@@ -1,9 +1,51 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import GamesTable from '../components/GamesTable';
 import GamesTableHead from '../components/GamesTableHead';
+import {useState, useEffect } from 'react';
 
 function GamesPage() {
+    const [games, setGames] = useState([]);
+    const [name, setName] = useState('');
+    const [min_number_player, setMin_number_player] = useState('');
+    const [max_number_player, setMax_number_player] = useState('');
+    // const [addGameData, setAddGameData] = useState({
+    //     name: '',
+    //     min_number_player: '',
+    //     max_number_player: '',
+    // })
+
+    const history = useHistory();
+
+    const loadGames = async () => {
+        const response = await fetch('/api/games');
+        const data = await response.json();
+        setGames(data);
+    }
+
+    useEffect(() => {
+        loadGames();
+    }, []);
+
+    const handleAddFormChange = (event) => {
+        event.preventDefault();
+
+    }
+
+    const addGame = async () => {
+        const newGame = {name, min_number_player, max_number_player};
+        console.log(newGame)
+        const response = await fetch('/api/games', {
+            method: 'POST',
+            body: JSON.stringify(newGame),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        
+    };
+
+
     return (
         <>
             <h1>Games Page</h1>
@@ -35,30 +77,32 @@ function GamesPage() {
                 </table>
             </div>
             <br></br>
-            <GamesTable />
+            <GamesTable games={games}/>
             <hr></hr>
             <div>
-                <table className="table-edit">
-                    <GamesTableHead input="game-add" />
-                    <tbody>
-                        <tr className="input-table">
-                            <td className="input-table"> 
-                                <input type="text" />
-                            </td>
-                            <td className="input-table">
-                                <input type="number" />
-                            </td>
-                            <td className ="input-table">
-                                <input type="number" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colSpan="5">
-                                <button className="add-button">Add</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2>Add Game</h2>
+                <form>
+                    <input 
+                        type="text" 
+                        value={name}
+                        placeholder='Enter game name...'
+                        onChange={e => setName(e.target.value)}
+                    />
+                    <input 
+                        type="number"
+                        value={min_number_player}
+                        placeholder='Enter min number of players...'
+                        onChange={e => setMin_number_player(e.target.value)}
+                    />
+                    <input 
+                        type="number"
+                        value={max_number_player}
+                        placeholder='Enter max number of players...'
+                        onChange={e => setMax_number_player(e.target.value)} 
+                    />
+                    <button type='submit' className="add-button" onClick={addGame}>Add</button>
+                </form>
+
             </div>
         </>
     );
