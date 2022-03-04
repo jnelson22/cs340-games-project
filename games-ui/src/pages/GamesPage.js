@@ -9,6 +9,11 @@ function GamesPage() {
     const [name, setName] = useState('');
     const [min_number_player, setMin_number_player] = useState('');
     const [max_number_player, setMax_number_player] = useState('');
+    // const [addGameData, setAddGameData] = useState({
+    //     name: '',
+    //     min_number_player: '',
+    //     max_number_player: '',
+    // })
 
     const history = useHistory();
 
@@ -22,6 +27,11 @@ function GamesPage() {
         loadGames();
     }, []);
 
+    const handleAddFormChange = (event) => {
+        event.preventDefault();
+
+    }
+
     const addGame = async () => {
         const newGame = {name, min_number_player, max_number_player};
         console.log(newGame)
@@ -32,8 +42,9 @@ function GamesPage() {
                 'Content-Type': 'application/json'
             },
         });
-        console.log(response)
+        
     };
+
 
     return (
         <>
