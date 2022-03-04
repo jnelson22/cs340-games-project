@@ -10,8 +10,6 @@ function GameCategoriesTable ({gameCategories}) {
                 {gameCategories.map((gameCategory) => (
                     <tr className='category-row'>
                         <td>{gameCategory.category}</td>
-                        <td><FiEdit2 /></td>
-                        <td><FiDelete /></td> 
                 </tr>
                 ))}
             </tbody>
