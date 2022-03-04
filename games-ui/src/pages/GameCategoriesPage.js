@@ -21,7 +21,7 @@ function GameCategoriesPage() {
     return (
         <>
             <h1>Game Categories</h1>
-                <GameCategoriesTable />
+                <GameCategoriesTable gameCategories={gameCategories}/>
             <div>
                 <table className="table-edit">
                     <GameCategoriesTableHead />
