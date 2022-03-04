@@ -2,24 +2,21 @@ import React from 'react';
 import PlayersTableHead from './PlayersTableHead';
 import { FiEdit2, FiDelete } from 'react-icons/fi';
 
-function PlayersTable () {
+function PlayersTable ({players}) {
     return (
         <table className="table-container">
             <PlayersTableHead />
-            <tr className='player-row'>
-                <td>Jeff</td>
-                <td>Nelson</td>
-                <td>Catan</td>
-                <td><FiEdit2 /></td>
-                <td><FiDelete /></td>
-            </tr>
-            <tr className='player-row'>
-                <td>Margaret</td>
-                <td>Swarts</td>
-                <td></td>
-                <td><FiEdit2 /></td>
-                <td><FiDelete /></td>
-            </tr>
+            <tbody>
+                {players.map((player) => (
+                    <tr className='player-row'>
+                    <td>{player.first_name}</td>
+                    <td>{player.last_name}</td>
+                    <td>{player.favorite_game}</td>
+                    <td><FiEdit2 /></td>
+                    <td><FiDelete /></td>
+                </tr>
+                ))}
+            </tbody>
         </table>
     )
 }
