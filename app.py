@@ -10,10 +10,6 @@ app = Flask(__name__, static_folder='games-ui/build', static_url_path='/')
 cors = CORS(app)
 api = Api(app)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> ad70eb718ab0c7e67c5ed828ebaa4f3613844086
 @app.route('/')
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
