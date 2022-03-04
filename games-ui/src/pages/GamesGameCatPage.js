@@ -8,7 +8,7 @@ function GamesGameCatPage() {
     const history = useHistory();
 
     const loadGamesGameCategories = async () => {
-        const response = await fetch('/api/gamesGameCategories'); 
+        const response = await fetch('/api/games-game-categories'); 
         const data = await response.json();
         setGamesGameCategories(data);
     }

@@ -9,7 +9,7 @@ function GameCategoriesPage() {
     const history = useHistory();
 
     const loadGameCategories = async () => {
-        const response = await fetch('/api/gameCategories');
+        const response = await fetch('/api/game-categories');
         const data = await response.json();
         setGameCategories(data);
     }
@@ -17,7 +17,7 @@ function GameCategoriesPage() {
     useEffect(() => {
         loadGameCategories();
     }, []);
-    
+
     return (
         <>
             <h1>Game Categories</h1>
