@@ -102,6 +102,7 @@ function GamesPage() {
                     />
                     <button type='submit' className="add-button" onClick={addGame}>Add</button>
                 </form>
+
             </div>
         </>
     );
