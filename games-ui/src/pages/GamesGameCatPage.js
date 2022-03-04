@@ -19,7 +19,7 @@ function GamesGameCatPage() {
     return (
         <>
             <h1>Games and Game Categories Intersection Page</h1>
-            <GamesGameCatTable />
+            <GamesGameCatTable gamesGameCategories={gamesGameCategories}/>
         </>
     );
 }
