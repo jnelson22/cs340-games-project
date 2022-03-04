@@ -64,6 +64,23 @@ def player():
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['category']))
         return redirect('/game-categories')
 
+@app.route('/api/scores', methods=["POST", "GET"])
+def player():
+    db_connection = db.connect_to_database()
+    if request.method == 'GET':
+        #TODO: need to update with a join for the games and players table to get text not just the IDs
+        query = "SELECT * from Scores;"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return jsonify(results)
+    elif request.method == 'POST':
+        form_data = request.get_json()
+        query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);;"
+        print(form_data['playerID'])
+        #TODO: find the IDs based on the name
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
+        return redirect('/game-categories')
+
 
 @app.errorhandler(404)
 def not_found(e):
