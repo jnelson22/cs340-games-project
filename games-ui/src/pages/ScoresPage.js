@@ -1,10 +1,24 @@
 import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import ScoresTable from '../components/ScoresTable';
 import ScoresTableHead from '../components/ScoresTableHead';
+import { useState, useEffect } from 'react';
 
 
 
 function ScoresPage() {
+    const [scores, setScores] = useState([]);
+    const history = useHistory();
+
+    const loadScores = async () => {
+        const response =await fetch('/api/games');
+        const data = await response.json();
+        setScores(data);
+    }
+
+    useEffect(() => {
+        loadScores();
+    })
     return (
         <>
             <h1>Scores Page</h1>
