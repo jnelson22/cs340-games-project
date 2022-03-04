@@ -38,7 +38,7 @@ function PlayersPage() {
                 </tr>
             </table>
             <br></br>
-            <PlayersTable />
+            <PlayersTable players={players}/>
             <hr></hr>
             <table className="table-edit">
                 <PlayersTableHead input="player-add"/>
