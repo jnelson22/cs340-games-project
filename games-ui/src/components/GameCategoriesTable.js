@@ -1,5 +1,4 @@
 import React from 'react';
-import GamesGameCatPage from '../pages/GamesGameCatPage';
 import GameCategoriesTableHead from './GameCategoriesTableHead';
 
 function GameCategoriesTable ({gameCategories}) {

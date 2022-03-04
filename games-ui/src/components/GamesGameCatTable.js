@@ -6,11 +6,12 @@ function GamesGameCatTable ({gamesGameCategories}) {
         <table className="table-container">
             <GamesGameCatTableHead />
             <tbody>
-                {gamesGameCategories.map((gamesGameCategory))}
-                <tr className='games-game-cat-row'>
+                {gamesGameCategories.map((gamesGameCategory) => (
+                    <tr className='games-game-cat-row'>
                     <td>{gamesGameCategory.gameID}</td>
                     <td>{gamesGameCategory.gameCategoryID}</td>
                 </tr>
+                ))}
             </tbody>
         </table>
     )
