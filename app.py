@@ -34,6 +34,21 @@ def game():
 
         return redirect('/games')
 
+@app.route('/api/players', methods=["POST", "GET"])
+def player():
+    db_connection = db.connect_to_database()
+    if request.method == 'GET':
+        query = "SELECT * from Players;"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        return jsonify(results)
+    elif request.method == 'POST':
+        form_data = request.get_json()
+        query = "INSERT INTO Players (first_name, last_name) VALUES (%s, %s, %s);"
+        print(form_data['favorite_game'])
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['first_name'], form_data['last_name'], form_data['favorite_game']))
+        return redirect('/players')
+
 
 @app.errorhandler(404)
 def not_found(e):
