@@ -1,24 +1,17 @@
 import React from 'react';
 import GamesGameCatTableHead from './GamesGameCatTableHead';
 
-function GamesGameCatTable () {
+function GamesGameCatTable ({gamesGameCategories}) {
     return (
         <table className="table-container">
-            <caption>Available Games</caption>
             <GamesGameCatTableHead />
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>12</td>
+                {gamesGameCategories.map((gamesGameCategory) => (
+                    <tr className='games-game-cat-row'>
+                    <td>{gamesGameCategory.gameID}</td>
+                    <td>{gamesGameCategory.gameCategoryID}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>33</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>50</td>
-                </tr>
+                ))}
             </tbody>
         </table>
     )
