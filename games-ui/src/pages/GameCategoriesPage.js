@@ -35,6 +35,7 @@ function GameCategoriesPage() {
         <>
             <h1>Game Categories</h1>
                 <GameCategoriesTable gameCategories={gameCategories}/>
+            <hr></hr>
             <div>
                 <table className="table-edit">
                     <GameCategoriesTableHead />
