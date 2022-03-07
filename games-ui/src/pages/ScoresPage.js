@@ -11,14 +11,15 @@ function ScoresPage() {
     const history = useHistory();
 
     const loadScores = async () => {
-        const response =await fetch('/api/scores');
+        const response = await fetch('/api/scores');
         const data = await response.json();
         setScores(data);
     }
 
     useEffect(() => {
         loadScores();
-    })
+    }, []);
+    
     return (
         <>
             <h1>Scores Page</h1>
