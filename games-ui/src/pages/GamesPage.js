@@ -27,10 +27,6 @@ function GamesPage() {
         loadGames();
     }, []);
 
-    const handleAddFormChange = (event) => {
-        event.preventDefault();
-
-    }
 
     const addGame = async () => {
         const newGame = {name, min_number_player, max_number_player};

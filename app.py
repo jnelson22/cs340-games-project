@@ -58,9 +58,10 @@ def game_cat():
         return jsonify(results)
     elif request.method == 'POST':
         form_data = request.get_json()
-        query = "INSERT INTO Players (category) VALUES (%s);"
-        print(form_data['favorite_game'])
-        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['category']))
+        query = "INSERT INTO Game_Categories (category) VALUES (%s);"
+        print(form_data)
+        print(form_data['category'])
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['category'],))
         return redirect('/game-categories')
 
 @app.route('/api/scores', methods=["POST", "GET"])
@@ -74,7 +75,7 @@ def scores():
         return jsonify(results)
     elif request.method == 'POST':
         form_data = request.get_json()
-        query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);;"
+        query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);"
         print(form_data['playerID'])
         #TODO: find the IDs based on the name
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
