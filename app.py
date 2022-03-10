@@ -19,12 +19,9 @@ def serve():
 def game():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        
         query = "SELECT * from Games;"
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
-        print(results)
-        print(jsonify(results))
         return jsonify(results)
     elif request.method == 'POST':
         print(request.get_json())
@@ -37,10 +34,8 @@ def game():
 @app.route('/api/games/<int:gameID>', methods=["DELETE"])
 def delete_game(gameID):
     db_connection = db.connect_to_database()
-    print(f"game ID: {gameID}")
     query = "DELETE FROM Games WHERE gameID = %s;"
-    cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(gameID,))
-    # return redirect('/games')
+    db.execute_query(db_connection=db_connection, query=query, query_params=(gameID,))
     return Response(status=204)
 
 @app.route('/api/players', methods=["POST", "GET"])
