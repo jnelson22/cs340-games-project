@@ -53,6 +53,13 @@ def player():
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['first_name'], form_data['last_name'], form_data['favorite_game']))
         return redirect('/players')
 
+@app.route('/api/players/<int:playerID>', methods=["DELETE"])
+def delete_game(playerID):
+    db_connection = db.connect_to_database()
+    query = "DELETE FROM Games WHERE playerID = %s;"
+    db.execute_query(db_connection=db_connection, query=query, query_params=(playerID,))
+    return Response(status=204)
+
 @app.route('/api/game-categories', methods=["POST", "GET"])
 def game_cat():
     db_connection = db.connect_to_database()
