@@ -100,6 +100,13 @@ def scores():
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
         return redirect('/game-categories')
 
+@app.route('/api/scores/<int:scoreID>', methods=["DELETE"])
+def delete_game(scoreID):
+    db_connection = db.connect_to_database()
+    query = "DELETE FROM Scores WHERE scoreID = %s;"
+    db.execute_query(db_connection=db_connection, query=query, query_params=(scoreID,))
+    return Response(status=204)
+
 
 @app.errorhandler(404)
 def not_found(e):
