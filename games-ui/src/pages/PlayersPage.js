@@ -50,7 +50,7 @@ function PlayersPage() {
                 </tr>
             </table>
             <br></br>
-            <PlayersTable players={players}/>
+            <PlayersTable players={players} onDelete={onDelete}/>
             <hr></hr>
             <table className="table-edit">
                 <PlayersTableHead input="player-add"/>
