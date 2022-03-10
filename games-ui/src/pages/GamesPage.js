@@ -9,11 +9,6 @@ function GamesPage() {
     const [name, setName] = useState('');
     const [min_number_player, setMin_number_player] = useState('');
     const [max_number_player, setMax_number_player] = useState('');
-    // const [addGameData, setAddGameData] = useState({
-    //     name: '',
-    //     min_number_player: '',
-    //     max_number_player: '',
-    // })
 
     const history = useHistory();
 
@@ -39,6 +34,17 @@ function GamesPage() {
             },
         });
         
+    };
+
+    const onDelete = async gameID => {
+        console.log(gameID)
+        const response = await fetch(`/api/games/${gameID}`, { method: 'DELETE' });
+        if (response.status === 204) {
+            const newGames = games.filter(m => m.gameID !== gameID);
+            setGames(newGames);
+        } else {
+            console.log(`Failed to delete movie with _id ${gameID}, status code = ${response.status}`)
+        }
     };
 
 
@@ -73,7 +79,7 @@ function GamesPage() {
                 </table>
             </div>
             <br></br>
-            <GamesTable games={games}/>
+            <GamesTable games={games} onDelete={onDelete}/>
             <hr></hr>
             <div>
                 <h2>Add Game</h2>
