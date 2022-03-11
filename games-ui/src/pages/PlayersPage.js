@@ -18,6 +18,18 @@ function PlayersPage() {
     useEffect(() => {
         loadPlayers();
     }, []);
+
+    const onDelete = async playerID => {
+        console.log(playerID)
+        const response = await fetch(`/api/games/${playerID}`, { method: 'DELETE' });
+        if (response.status === 204) {
+            const newGames = players.filter(m => m.playerID !== playerID);
+            setPlayers(newGames);
+        } else {
+            console.log(`Failed to delete movie with _id ${playerID}, status code = ${response.status}`)
+        }
+    };
+
     return (
         <>
             <h1>Players Page</h1>
@@ -38,7 +50,7 @@ function PlayersPage() {
                 </tr>
             </table>
             <br></br>
-            <PlayersTable players={players}/>
+            <PlayersTable players={players} onDelete={onDelete}/>
             <hr></hr>
             <table className="table-edit">
                 <PlayersTableHead input="player-add"/>
