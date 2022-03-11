@@ -1,5 +1,6 @@
 from crypt import methods
-from flask import Flask, render_template, send_from_directory, request, jsonify, make_response, redirect
+import re
+from flask import Flask, Response, render_template, send_from_directory, request, jsonify, make_response, redirect, Request
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
 from api.api_handler import GamesApiHandler
@@ -18,12 +19,9 @@ def serve():
 def game():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        
         query = "SELECT * from Games;"
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
-        print(results)
-        print(jsonify(results))
         return jsonify(results)
     elif request.method == 'POST':
         print(request.get_json())
@@ -32,6 +30,13 @@ def game():
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player']))
 
         return redirect('/games')
+
+@app.route('/api/games/<int:gameID>', methods=["DELETE"])
+def delete_game(gameID):
+    db_connection = db.connect_to_database()
+    query = "DELETE FROM Games WHERE gameID = %s;"
+    db.execute_query(db_connection=db_connection, query=query, query_params=(gameID,))
+    return Response(status=204)
 
 @app.route('/api/players', methods=["POST", "GET"])
 def player():
