@@ -7,6 +7,10 @@ import { useState, useEffect } from 'react';
 
 function PlayersPage() {
     const [players, setPlayers] = useState([]);
+    const [first_name, setFirstName] = useState('');
+    const [last_name, setLastName] = useState('');
+    const [fav_game, setFavGame] = useState('');
+
     const history = useHistory();
 
     const loadPlayers = async () => {
@@ -18,6 +22,19 @@ function PlayersPage() {
     useEffect(() => {
         loadPlayers();
     }, []);
+
+    const addPlayer = async () => {
+        const newPlayer = {first_name, last_name, fav_game};
+        console.log(newPlayer)
+        const response = await fetch('/api/players', {
+            method: 'POST',
+            body: JSON.stringify(newPlayer),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        
+    };
 
     const onDelete = async playerID => {
         console.log(playerID)
@@ -57,18 +74,33 @@ function PlayersPage() {
                 <tbody>
                     <tr className="input-table">
                         <td className="input-table">
-                            <input type="text" />
+                            <input 
+                                type="text" 
+                                required
+                                value={first_name}
+                                onChange={e => setFirstName(e.target.value)}
+                            />
                         </td>
                         <td className="input-table">
-                            <input type="text" />
+                            <input 
+                                type="text" 
+                                required
+                                value={last_name}
+                                onChange={e => setLastName(e.target.value)}
+                            />
                         </td>
                         <td className="input-table">
-                            <input type="text" />
+                            <input 
+                                type="text" 
+                                required
+                                value={fav_game}
+                                onChange={e => setFavGame(e.target.value)}
+                            />
                         </td>
                     </tr>
                     <tr>
                         <td colSpan="5"> 
-                            <button className="add-button">Add</button>
+                            <button className="add-button" onClick={addPlayer}>Add</button>
                             
                         </td>
                     </tr>

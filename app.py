@@ -49,9 +49,19 @@ def player():
         return jsonify(results)
     elif request.method == 'POST':
         form_data = request.get_json()
-        query = "INSERT INTO Players (first_name, last_name) VALUES (%s, %s, %s);"
-        print(form_data['favorite_game'])
-        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['first_name'], form_data['last_name'], form_data['favorite_game']))
+        
+        fav_game = form_data['fav_game']
+        print(form_data['fav_game'])
+        first_name = form_data['first_name'].capitalize()
+        last_name = form_data['last_name'].capitalize()
+        
+        if len(fav_game) == 0:
+            query = "INSERT INTO Players (first_name, last_name) VALUES (%s, %s);"
+            db.execute_query(db_connection=db_connection, query=query, query_params=(first_name, last_name,))
+        else:
+            query = "INSERT INTO Players (first_name, last_name, favorite_game) VALUES (%s, %s, %s);"
+            db.execute_query(db_connection=db_connection, query=query, query_params=(first_name, last_name, fav_game))
+        
         return redirect('/players')
 
 @app.route('/api/players/<int:playerID>', methods=["DELETE"])
@@ -92,6 +102,10 @@ def scores():
         query = "SELECT * from Scores;"
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
+        for r in results:
+            print(r)
+            
+        print(results)
         return jsonify(results)
     elif request.method == 'POST':
         form_data = request.get_json()
