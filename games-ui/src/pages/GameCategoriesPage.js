@@ -31,6 +31,17 @@ function GameCategoriesPage() {
         
     };
 
+    const onDelete = async game_categoryID => {
+        console.log(game_categoryID)
+        const response = await fetch(`/api/games/${game_categoryID}`, { method: 'DELETE' });
+        if (response.status === 204) {
+            const newCategories = category.filter(m => m.game_categoryID !== game_categoryID);
+            setGameCategories(newCategories);
+        } else {
+            console.log(`Failed to delete movie with _id ${game_categoryID}, status code = ${response.status}`)
+        }
+    };
+
     return (
         <>
             <h1>Game Categories</h1>

@@ -1,5 +1,5 @@
 from crypt import methods
-import re
+import os
 from flask import Flask, Response, render_template, send_from_directory, request, jsonify, make_response, redirect, Request
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
@@ -10,6 +10,7 @@ import database.db_connector as db
 app = Flask(__name__, static_folder='games-ui/build', static_url_path='/')
 cors = CORS(app)
 api = Api(app)
+FLASK_ENV=os.environ.get('FLASK_ENV')
 
 @app.route('/')
 def serve():
@@ -54,7 +55,7 @@ def player():
         return redirect('/players')
 
 @app.route('/api/players/<int:playerID>', methods=["DELETE"])
-def delete_game(playerID):
+def delete_player(playerID):
     db_connection = db.connect_to_database()
     query = "DELETE FROM Players WHERE playerID = %s;"
     db.execute_query(db_connection=db_connection, query=query, query_params=(playerID,))
@@ -77,7 +78,7 @@ def game_cat():
         return redirect('/game-categories')
 
 @app.route('/api/game-categories/<int:game_categoryID>', methods=["DELETE"])
-def delete_game(game_categoryID):
+def delete_game_cat(game_categoryID):
     db_connection = db.connect_to_database()
     query = "DELETE FROM Game_Categories WHERE game_categoryID = %s;"
     db.execute_query(db_connection=db_connection, query=query, query_params=(game_categoryID,))
@@ -101,7 +102,7 @@ def scores():
         return redirect('/game-categories')
 
 @app.route('/api/scores/<int:scoreID>', methods=["DELETE"])
-def delete_game(scoreID):
+def delete_score(scoreID):
     db_connection = db.connect_to_database()
     query = "DELETE FROM Scores WHERE scoreID = %s;"
     db.execute_query(db_connection=db_connection, query=query, query_params=(scoreID,))
