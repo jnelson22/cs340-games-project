@@ -24,7 +24,7 @@ function ScoresPage() {
         console.log(scoreID)
         const response = await fetch(`/api/games/${scoreID}`, { method: 'DELETE' });
         if (response.status === 204) {
-            const newScores = scores.filter(m => m.playerID !== scoreID);
+            const newScores = scores.filter(m => m.scoreID !== scoreID);
             setScores(newScores);
         } else {
             console.log(`Failed to delete movie with _id ${scoreID}, status code = ${response.status}`)

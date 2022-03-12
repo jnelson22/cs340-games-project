@@ -22,7 +22,7 @@ function GamesPage() {
         loadGames();
     }, []);
 
-
+    // TODO: need to fix onChange to submit, on change gets called everyinput 
     const addGame = async () => {
         const newGame = {name, min_number_player, max_number_player};
         console.log(newGame)
@@ -87,17 +87,22 @@ function GamesPage() {
                     <input 
                         type="text" 
                         value={name}
+                        required
                         placeholder='Enter game name...'
                         onChange={e => setName(e.target.value)}
                     />
                     <input 
                         type="number"
+                        min="1"
+                        required
                         value={min_number_player}
                         placeholder='Enter min number of players...'
                         onChange={e => setMin_number_player(e.target.value)}
                     />
                     <input 
                         type="number"
+                        min="1"
+                        required
                         value={max_number_player}
                         placeholder='Enter max number of players...'
                         onChange={e => setMax_number_player(e.target.value)} 
