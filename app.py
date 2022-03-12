@@ -49,13 +49,12 @@ def player():
         return jsonify(results)
     elif request.method == 'POST':
         form_data = request.get_json()
-        
+
         fav_game = form_data['fav_game']
-        print(form_data['fav_game'])
         first_name = form_data['first_name'].capitalize()
         last_name = form_data['last_name'].capitalize()
         
-        if len(fav_game) == 0:
+        if fav_game == "":
             query = "INSERT INTO Players (first_name, last_name) VALUES (%s, %s);"
             db.execute_query(db_connection=db_connection, query=query, query_params=(first_name, last_name,))
         else:
@@ -104,7 +103,7 @@ def scores():
         results = cursor.fetchall()
         for r in results:
             print(r)
-            
+
         print(results)
         return jsonify(results)
     elif request.method == 'POST':

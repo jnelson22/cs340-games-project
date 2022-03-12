@@ -10,6 +10,8 @@ function PlayersPage() {
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
     const [fav_game, setFavGame] = useState('');
+    const [games, setGames] = useState([]);
+
 
     const history = useHistory();
 
@@ -33,7 +35,7 @@ function PlayersPage() {
                 'Content-Type': 'application/json'
             },
         });
-        
+        console.log(response)
     };
 
     const onDelete = async playerID => {
@@ -46,6 +48,17 @@ function PlayersPage() {
             console.log(`Failed to delete movie with _id ${playerID}, status code = ${response.status}`)
         }
     };
+
+    const loadGames = async () => {
+        const response = await fetch('/api/games');
+        const data = await response.json();
+        setGames(data);
+        console.log(data)
+    }
+
+    useEffect(() => {
+        loadGames();
+    }, []);
 
     return (
         <>
@@ -90,12 +103,13 @@ function PlayersPage() {
                             />
                         </td>
                         <td className="input-table">
-                            <input 
-                                type="text" 
-                                required
-                                value={fav_game}
-                                onChange={e => setFavGame(e.target.value)}
-                            />
+                            <select onChange={e => setFavGame(e.target.value)}>
+                                <option value="none" selected disabled hidden>Select an Option</option>
+                                {games.map((game, i) => (
+                                    <option value={game.gameID}>{game.name}</option>
+                                )
+                                )}
+                            </select>
                         </td>
                     </tr>
                     <tr>
