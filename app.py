@@ -97,17 +97,14 @@ def delete_game_cat(game_categoryID):
 def scores():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        #TODO: need to update with a join for the games and players table to get text not just the IDs
         query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) as fullName,  Games.name as game, Scores.score
                     from Players
                     JOIN Scores on Players.playerID = Scores.playerID
                     JOIN Games on Games.gameID = Scores.gameID;"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
-
-        print(results)
-        print(jsonify(results))
         return jsonify(results)
+        
     elif request.method == 'POST':
         form_data = request.get_json()
         query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);"
