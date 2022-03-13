@@ -70,6 +70,7 @@ def delete_player(playerID):
     db.execute_query(db_connection=db_connection, query=query, query_params=(playerID,))
     return Response(status=204)
 
+""" Game Catigories Page API """
 @app.route('/api/game-categories', methods=["POST", "GET"])
 def game_cat():
     db_connection = db.connect_to_database()
@@ -93,6 +94,7 @@ def delete_game_cat(game_categoryID):
     db.execute_query(db_connection=db_connection, query=query, query_params=(game_categoryID,))
     return Response(status=204)
 
+""" Scores page API """
 @app.route('/api/scores', methods=["POST", "GET"])
 def scores():
     db_connection = db.connect_to_database()
@@ -108,10 +110,8 @@ def scores():
     elif request.method == 'POST':
         form_data = request.get_json()
         query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);"
-        print(form_data['playerID'])
-        #TODO: find the IDs based on the name
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
-        return redirect('/game-categories')
+        return redirect('/scores')
 
 @app.route('/api/scores/<int:scoreID>', methods=["DELETE"])
 def delete_score(scoreID):

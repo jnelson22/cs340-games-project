@@ -8,6 +8,12 @@ import { useState, useEffect } from 'react';
 
 function ScoresPage() {
     const [scores, setScores] = useState([]);
+    const [players, setPlayers] = useState([]);
+    const [games, setGames] = useState([]);
+    const [playerID, setPlayerID] = useState('');
+    const [gameID, setGameID] = useState('');
+    const [score, setScore] = useState('');
+    
     const history = useHistory();
 
     const loadScores = async () => {
@@ -29,6 +35,39 @@ function ScoresPage() {
         } else {
             console.log(`Failed to delete movie with _id ${scoreID}, status code = ${response.status}`)
         }
+    };
+
+    const loadPlayers = async () => {
+        const response = await fetch('/api/players');
+        const data = await response.json();
+        setPlayers(data);
+    }
+
+    useEffect(() => {
+        loadPlayers();
+    }, []);
+
+    const loadGames = async () => {
+        const response = await fetch('/api/games');
+        const data = await response.json();
+        setGames(data);
+    }
+
+    useEffect(() => {
+        loadGames();
+    }, []);
+
+    const addScore = async () => {
+        const newScore = {playerID, gameID, score};
+        console.log(newScore)
+        const response = await fetch('/api/scores', {
+            method: 'POST',
+            body: JSON.stringify(newScore),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        console.log(response)
     };
 
     return (
@@ -55,24 +94,35 @@ function ScoresPage() {
                 <tbody>
                     <tr className="input-table">
                         <td className="input-table">
-                            <select id="dropdown">
-                                <option value="Jeff Nelson">Jeff Nelson</option>
-                                <option value="Margaret Swarts">Margaret Swarts</option>
+                            <select onChange={e => setPlayerID(e.target.value)}>
+                                <option value="none" selected disabled hidden>Select a Player</option>
+                                {players.map((player, i) => (
+                                    <option value={player.playerID}>{player.first_name} {player.last_name}</option>
+                                )
+                                )}
                             </select>
                         </td>
                         <td className="input-table">
-                            <select id="dropdown">
-                                <option value="">Catan</option>
-                                <option value="">Kingdomino</option>
+                            <select onChange={e => setGameID(e.target.value)}>
+                                <option value="none" selected disabled hidden>Select a Game</option>
+                                {games.map((game, i) => (
+                                    <option value={game.gameID}>{game.name}</option>
+                                )
+                                )}
                             </select>
                         </td>
                         <td className="input-table">
-                            <input type="text" />
+                            <input 
+                                type="number"
+                                required
+                                placeholder='Enter score'
+                                onChange={e => setScore(e.target.value)}
+                            />
                         </td>
                     </tr>
                     <tr>
                         <td colSpan="4"> 
-                            <button className="add-button">Add</button>
+                            <button className="add-button" type='submit' onClick={addScore}>Add Score</button>
                         </td>
                     </tr>
                 </tbody>

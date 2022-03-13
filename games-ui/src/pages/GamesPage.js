@@ -33,7 +33,6 @@ function GamesPage() {
                 'Content-Type': 'application/json'
             },
         });
-        
     };
 
     const onDelete = async gameID => {
