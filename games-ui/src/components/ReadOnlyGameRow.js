@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiEdit2, FiDelete } from 'react-icons/fi';
+import { useState } from 'react';
 
 const ReadOnlyGameRow = ({game, onDelete}) => {
     return (

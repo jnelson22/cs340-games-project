@@ -3,7 +3,7 @@ import GamesTableHead from './GamesTableHead';
 import { FiEdit2, FiDelete } from 'react-icons/fi';
 import ReadOnlyGameRow from './ReadOnlyGameRow';
 
-function GamesTable ({games, onDelete}) {
+function GamesTable ({games}) {
     console.log(games)
     
     return (
@@ -11,7 +11,7 @@ function GamesTable ({games, onDelete}) {
             <GamesTableHead />
             <tbody>
                 {games.map((game, i) => (
-                    <ReadOnlyGameRow game={game} />
+                    <ReadOnlyGameRow game={game} onDelete={onDelete} />
                     //<tr className='game-row'>
                     //    <td>{game.name}</td>
                     //    <td>{game.min_number_player}</td>
