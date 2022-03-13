@@ -10,6 +10,7 @@ import ScoresPage from './pages/ScoresPage';
 import Navigator from './components/navigation';
 
 function App() {
+  
   return (
     <Router>
       <Navigator />

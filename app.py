@@ -29,8 +29,8 @@ def game():
         form_data = request.get_json()
         query = "INSERT INTO Games (name, min_number_player, max_number_player) VALUES (%s, %s, %s)"
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player']))
-
-        return redirect('/games')
+        return Response(status=204)
+        # return redirect('/games')
 
 @app.route('/api/games/<int:gameID>', methods=["DELETE"])
 def delete_game(gameID):
@@ -38,6 +38,17 @@ def delete_game(gameID):
     query = "DELETE FROM Games WHERE gameID = %s;"
     db.execute_query(db_connection=db_connection, query=query, query_params=(gameID,))
     return Response(status=204)
+    
+@app.route('/api/games/<int:gameID>', methods=["POST"])
+def edit_game(gameID):
+    db_connection = db.connect_to_database()
+    if request.method == 'POST':
+        print("update game")
+        query = "UPDATE Games SET name=%s, min_number_player=%s, max_number_player=%s WHERE gameID=%s;"
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player'], form_data['gameID']))
+        return redirect('/games')
+
+
 
 @app.route('/api/players', methods=["POST", "GET"])
 def player():
