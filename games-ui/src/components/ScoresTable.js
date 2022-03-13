@@ -2,7 +2,7 @@ import React from 'react';
 import ScoresTableHead from './ScoresTableHead';
 import { FiEdit2, FiDelete } from 'react-icons/fi';
 
-function ScoresTable ({scores}) {
+function ScoresTable ({scores, onDelete}) {
     return (
         <table className="table-container">
             <ScoresTableHead />
@@ -14,7 +14,7 @@ function ScoresTable ({scores}) {
                         <td>{score.score}</td>
                         <td><input type="checkbox" checked/></td>
                         <td><FiEdit2 /></td>
-                        <td><FiDelete /></td>
+                        <td><FiDelete onClick={() => onDelete(score.scoreID)}/></td>
                     </tr>
                 )}
             </tbody>

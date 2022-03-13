@@ -19,7 +19,18 @@ function ScoresPage() {
     useEffect(() => {
         loadScores();
     }, []);
-    
+
+    const onDelete = async scoreID => {
+        console.log(scoreID)
+        const response = await fetch(`/api/games/${scoreID}`, { method: 'DELETE' });
+        if (response.status === 204) {
+            const newScores = scores.filter(m => m.scoreID !== scoreID);
+            setScores(newScores);
+        } else {
+            console.log(`Failed to delete movie with _id ${scoreID}, status code = ${response.status}`)
+        }
+    };
+
     return (
         <>
             <h1>Scores Page</h1>
@@ -37,7 +48,7 @@ function ScoresPage() {
                 </tr>
             </table>
             <br></br>
-            <ScoresTable scores={scores}/>
+            <ScoresTable scores={scores} onDelete={onDelete}/>
             <hr></hr>
             <table className="table-edit">
                 <ScoresTableHead input="score-add"/>
