@@ -8,6 +8,7 @@ import GamesGameCatPage from './pages/GamesGameCatPage';
 import PlayersPage from './pages/PlayersPage';
 import ScoresPage from './pages/ScoresPage';
 import Navigator from './components/navigation';
+import { useState } from 'react';
 
 function App() {
   
