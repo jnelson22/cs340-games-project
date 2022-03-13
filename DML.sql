@@ -46,4 +46,8 @@ DELETE FROM Games WHERE gameName=:gamenameInput;
 DELETE FROM Scores WHERE score=:scoreInput;
 
 
-
+-- query to display player and game names on the scores page
+SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games.name as game_name, Scores.score
+FROM Players
+JOIN Scores on Players.playerID = Scores.playerID
+JOIN Games on Games.gameID = Scores.gameID
