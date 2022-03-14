@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import ScoresTable from '../components/ScoresTable';
 import ScoresTableHead from '../components/ScoresTableHead';
 import { useState, useEffect } from 'react';
@@ -20,6 +20,7 @@ function ScoresPage() {
         const response = await fetch('/api/scores');
         const data = await response.json();
         setScores(data);
+        console.log(data);
     }
 
     useEffect(() => {
@@ -28,7 +29,7 @@ function ScoresPage() {
 
     const onDelete = async scoreID => {
         console.log(scoreID)
-        const response = await fetch(`/api/games/${scoreID}`, { method: 'DELETE' });
+        const response = await fetch(`/api/scores/${scoreID}`, { method: 'DELETE' });
         if (response.status === 204) {
             const newScores = scores.filter(m => m.scoreID !== scoreID);
             setScores(newScores);
@@ -68,6 +69,12 @@ function ScoresPage() {
             },
         });
         console.log(response)
+        if (response.status === 201) {
+            alert("Score has been added");
+            loadScores()
+            // const newScores = [...scores, newScore];
+            // setScores(newScores)
+        }
     };
 
     return (

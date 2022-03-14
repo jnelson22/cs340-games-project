@@ -9,8 +9,8 @@ function ScoresTable ({scores, onDelete}) {
             <tbody>
                 {scores.map((score) =>
                     <tr className='player-row'>
-                        <td>{score.fullName}</td>
-                        <td>{score.game}</td>
+                        <td>{score.player_name}</td>
+                        <td>{score.game_name}</td>
                         <td>{score.score}</td>
                         <td><input type="checkbox" checked/></td>
                         <td><FiEdit2 /></td>

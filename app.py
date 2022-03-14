@@ -16,6 +16,7 @@ FLASK_ENV=os.environ.get('FLASK_ENV')
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
+""" Games page API"""
 @app.route('/api/games', methods=["POST", "GET"])
 def game():
     db_connection = db.connect_to_database()
@@ -30,7 +31,7 @@ def game():
         query = "INSERT INTO Games (name, min_number_player, max_number_player) VALUES (%s, %s, %s)"
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player']))
 
-        return redirect('/games')
+        return Response(status=201)
 
 @app.route('/api/games/<int:gameID>', methods=["DELETE"])
 def delete_game(gameID):
@@ -39,6 +40,7 @@ def delete_game(gameID):
     db.execute_query(db_connection=db_connection, query=query, query_params=(gameID,))
     return Response(status=204)
 
+""" Palyers Page API """
 @app.route('/api/players', methods=["POST", "GET"])
 def player():
     db_connection = db.connect_to_database()
@@ -99,10 +101,10 @@ def delete_game_cat(game_categoryID):
 def scores():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) as fullName,  Games.name as game, Scores.score
-                    from Players
+        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games.name as game_name, Scores.score, Scores.scoreID
+                    FROM Players
                     JOIN Scores on Players.playerID = Scores.playerID
-                    JOIN Games on Games.gameID = Scores.gameID;"""
+                    JOIN Games on Games.gameID = Scores.gameID"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
         return jsonify(results)
@@ -111,7 +113,7 @@ def scores():
         form_data = request.get_json()
         query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);"
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
-        return redirect('/scores')
+        return Response(status=201)
 
 @app.route('/api/scores/<int:scoreID>', methods=["DELETE"])
 def delete_score(scoreID):

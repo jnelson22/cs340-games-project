@@ -27,7 +27,6 @@ function PlayersPage() {
 
     const addPlayer = async () => {
         const newPlayer = {first_name, last_name, fav_game};
-        console.log(newPlayer)
         const response = await fetch('/api/players', {
             method: 'POST',
             body: JSON.stringify(newPlayer),
