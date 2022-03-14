@@ -42,12 +42,12 @@ function PlayersPage() {
     };
 
     const onDelete = async playerID => {
-        const response = await fetch(`/api/games/${playerID}`, { method: 'DELETE' });
+        const response = await fetch(`/api/players/${playerID}`, { method: 'DELETE' });
         if (response.status === 204) {
             const newGames = players.filter(m => m.playerID !== playerID);
             setPlayers(newGames);
         } else {
-            console.log(`Failed to delete movie with _id ${playerID}, status code = ${response.status}`)
+            console.log(`Failed to delete game with id ${playerID}, status code = ${response.status}`)
         }
     };
 
