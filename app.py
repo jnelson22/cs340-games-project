@@ -45,7 +45,9 @@ def delete_game(gameID):
 def player():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        query = "SELECT * from Players;"
+        query = """SELECT Players.playerID, Players.first_name, Players.last_name, Games.name AS favorite_game  
+                    FROM Players
+                    LEFT JOIN Games ON Players.favorite_game = Games.gameID;"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
         return jsonify(results)
@@ -63,7 +65,7 @@ def player():
             query = "INSERT INTO Players (first_name, last_name, favorite_game) VALUES (%s, %s, %s);"
             db.execute_query(db_connection=db_connection, query=query, query_params=(first_name, last_name, fav_game))
         
-        return redirect('/players')
+        return Response(status=201)
 
 @app.route('/api/players/<int:playerID>', methods=["DELETE"])
 def delete_player(playerID):
@@ -87,7 +89,7 @@ def game_cat():
         print(form_data)
         print(form_data['category'])
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['category'],))
-        return redirect('/game-categories')
+        return Response(status=201)
 
 @app.route('/api/game-categories/<int:game_categoryID>', methods=["DELETE"])
 def delete_game_cat(game_categoryID):

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PlayersTable from '../components/PlayersTable';
 import PlayersTableHead from '../components/PlayersTableHead';
 import { useState, useEffect } from 'react';
@@ -35,10 +35,13 @@ function PlayersPage() {
             },
         });
         console.log(response)
+        if (response.status === 201) {
+            alert("Player was added!")
+            loadPlayers()
+        }
     };
 
     const onDelete = async playerID => {
-        console.log(playerID)
         const response = await fetch(`/api/games/${playerID}`, { method: 'DELETE' });
         if (response.status === 204) {
             const newGames = players.filter(m => m.playerID !== playerID);
@@ -52,7 +55,6 @@ function PlayersPage() {
         const response = await fetch('/api/games');
         const data = await response.json();
         setGames(data);
-        console.log(data)
     }
 
     useEffect(() => {
