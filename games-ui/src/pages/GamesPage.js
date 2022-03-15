@@ -22,10 +22,8 @@ function GamesPage() {
         loadGames();
     }, []);
 
-    // TODO: need to fix onChange to submit, on change gets called everyinput 
     const addGame = async () => {
         const newGame = {name, min_number_player, max_number_player};
-        console.log(newGame)
         const response = await fetch('/api/games', {
             method: 'POST',
             body: JSON.stringify(newGame),
@@ -33,7 +31,10 @@ function GamesPage() {
                 'Content-Type': 'application/json'
             },
         });
-        
+        if (response.status === 201) {
+            alert("Game has been added")
+            loadGames()
+        }
     };
 
     const onDelete = async gameID => {
@@ -83,33 +84,47 @@ function GamesPage() {
             <hr></hr>
             <div>
                 <h2>Add Game</h2>
-                <form>
-                    <input 
-                        type="text" 
-                        value={name}
-                        required
-                        placeholder='Enter game name...'
-                        onChange={e => setName(e.target.value)}
-                    />
-                    <input 
-                        type="number"
-                        min="1"
-                        required
-                        value={min_number_player}
-                        placeholder='Enter min number of players...'
-                        onChange={e => setMin_number_player(e.target.value)}
-                    />
-                    <input 
-                        type="number"
-                        min="1"
-                        required
-                        value={max_number_player}
-                        placeholder='Enter max number of players...'
-                        onChange={e => setMax_number_player(e.target.value)} 
-                    />
-                    <button type='submit' className="add-button" onClick={addGame}>Add</button>
-                </form>
-
+                    <table className='table-edit'>
+                        <GamesTableHead input='game-add'/>
+                        <tbody>
+                            <tr className='input-table'>
+                                <td className='input-table'>
+                                    <input 
+                                        type="text" 
+                                        value={name}
+                                        required
+                                        placeholder='Enter game name...'
+                                        onChange={e => setName(e.target.value)}
+                                    />
+                                </td>
+                                <td className='input-table'>
+                                    <input 
+                                        type="number"
+                                        min="1"
+                                        required
+                                        value={min_number_player}
+                                        placeholder='Enter min number of players...'
+                                        onChange={e => setMin_number_player(e.target.value)}
+                                    />
+                                </td>
+                                <td className='input-table'>
+                                    <input 
+                                        type="number"
+                                        min="1"
+                                        required
+                                        value={max_number_player}
+                                        placeholder='Enter max number of players...'
+                                        onChange={e => setMax_number_player(e.target.value)} 
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colSpan="4">
+                                    <button type='submit' className="add-button" onClick={addGame}>Add</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
             </div>
         </>
     );
