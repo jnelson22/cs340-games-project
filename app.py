@@ -41,7 +41,7 @@ def delete_game(gameID):
     return Response(status=204)
 
 @app.route('/api/edit-game', methods=["PUT"])
-def edit_game(gameID):
+def edit_game():
     db_connection = db.connect_to_database()
     if request.method == 'PUT':
         print("update game")
