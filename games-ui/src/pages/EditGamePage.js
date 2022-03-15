@@ -11,7 +11,8 @@ export const EditGamePage = ({gameToEdit}) => {
 
     const editGame = async () => {
         const editedGame = { name, min_number_player, max_number_player };
-        const response= await fetch('api/games/', {
+        //const response= await fetch('api/games/', {
+        const response= await fetch('/api/edit-game', {
             method: 'PUT', 
             body: JSON.stringify(editedGame),
             headers: {
@@ -42,6 +43,7 @@ export const EditGamePage = ({gameToEdit}) => {
                 value={max_number_player}
                 onChange={e => setMaxNum(e.target.value)} />
             <button
+                className="add-button"
                 onClick={editGame}
             >Save</button>
         </div>

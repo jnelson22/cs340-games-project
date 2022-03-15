@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import GamesTable from '../components/GamesTable';
 import GamesTableHead from '../components/GamesTableHead';
 import {useState, useEffect } from 'react';
-import {useHistory} from 'react-router-dom';
+//import {useHistory} from 'react-router-dom';
 
 function GamesPage({setGameToEdit}) {
     const [games, setGames] = useState([]);
