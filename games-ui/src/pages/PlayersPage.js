@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PlayersTable from '../components/PlayersTable';
 import PlayersTableHead from '../components/PlayersTableHead';
 import { useState, useEffect } from 'react';
@@ -27,7 +27,6 @@ function PlayersPage() {
 
     const addPlayer = async () => {
         const newPlayer = {first_name, last_name, fav_game};
-        console.log(newPlayer)
         const response = await fetch('/api/players', {
             method: 'POST',
             body: JSON.stringify(newPlayer),
@@ -36,16 +35,19 @@ function PlayersPage() {
             },
         });
         console.log(response)
+        if (response.status === 201) {
+            alert("Player was added!")
+            loadPlayers()
+        }
     };
 
     const onDelete = async playerID => {
-        console.log(playerID)
-        const response = await fetch(`/api/games/${playerID}`, { method: 'DELETE' });
+        const response = await fetch(`/api/players/${playerID}`, { method: 'DELETE' });
         if (response.status === 204) {
             const newGames = players.filter(m => m.playerID !== playerID);
             setPlayers(newGames);
         } else {
-            console.log(`Failed to delete movie with _id ${playerID}, status code = ${response.status}`)
+            console.log(`Failed to delete game with id ${playerID}, status code = ${response.status}`)
         }
     };
 
@@ -53,7 +55,6 @@ function PlayersPage() {
         const response = await fetch('/api/games');
         const data = await response.json();
         setGames(data);
-        console.log(data)
     }
 
     useEffect(() => {
