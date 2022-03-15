@@ -23,7 +23,7 @@ export const EditGamePage = ({gameToEdit}) => {
         }else {
             alert(`failed to edit game, status code =${response.status}`);
         }
-        navigate('/');
+        history.push('/');
     };
 
     return (
