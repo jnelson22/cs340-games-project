@@ -9,7 +9,7 @@ export const EditGamePage = ({gameToEdit}) => {
     const [min_number_player, setMinNum] = useState(gameToEdit.min_number_player);
     const [max_number_player, setMaxNum] = useState(gameToEdit.max_number_player);
 
-    const editGame = async => {
+    const editGame = async () => {
         const editedGame = { name, min_number_player, max_number_player };
         const response= await fetch('api/games/', {
             method: 'PUT', 
