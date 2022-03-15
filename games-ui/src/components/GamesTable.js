@@ -2,7 +2,7 @@ import React from 'react';
 import GamesTableHead from './GamesTableHead';
 import { FiEdit2, FiDelete } from 'react-icons/fi';
 
-function GamesTable ({games, onDelete}) {
+function GamesTable ({games, onEdit, onDelete}) {
     console.log(games)
     
     return (
@@ -14,7 +14,7 @@ function GamesTable ({games, onDelete}) {
                         <td>{game.name}</td>
                         <td>{game.min_number_player}</td>
                         <td>{game.max_number_player}</td>
-                        <td><FiEdit2 onEdit = {onEdit}/></td>
+                        <td><FiEdit2 onClick={() => onEdit(game)}/></td>
                         <td><FiDelete onClick={() => onDelete(game.gameID)}/></td>
                     </tr>
                 )
