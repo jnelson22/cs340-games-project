@@ -9,7 +9,7 @@ function GamesGameCatTable ({gamesGameCategories}) {
                 {gamesGameCategories.map((gamesGameCategory) => (
                     <tr className='games-game-cat-row'>
                     <td>{gamesGameCategory.gameID}</td>
-                    <td>{gamesGameCategory.gameCategoryID}</td>
+                    <td>{gamesGameCategory.categoryID}</td>
                 </tr>
                 ))}
             </tbody>

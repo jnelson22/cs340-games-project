@@ -28,7 +28,14 @@ function GameCategoriesPage() {
                 'Content-Type': 'application/json'
             },
         });
-        
+        console.log(response)
+        if (response.status === 201) {
+            alert('Game category added')
+            loadGameCategories()
+        } else {
+            alert('Failed to add game category')
+            console.log(response.headers)
+        }
     };
 
     const onDelete = async game_categoryID => {
