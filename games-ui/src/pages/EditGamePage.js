@@ -12,8 +12,8 @@ export const EditGamePage = ({gameToEdit}) => {
     const editGame = async () => {
         const editedGame = { name, min_number_player, max_number_player };
         //const response= await fetch('api/games/', {
-        const response= await fetch(`/api/games/${gameToEdit.gameID}`, {
-            method: 'POST', 
+        const response= await fetch(`/api/edit-game/${gameToEdit.gameID}`, {
+            method: 'PUT', 
             body: JSON.stringify(editedGame),
             headers: {
                 'Content-Type': 'application/json',
