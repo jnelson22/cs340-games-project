@@ -21,7 +21,10 @@ function App() {
             <HomePage />
         </Route>
         <Route path="/games" exact>
-            <GamesPage />
+            <GamesPage setGameToEdit={setGameToEdit}/>
+        </Route>
+        <Route path="/game-to-edit">
+            <EditGamePage gameToEdit={gameToEdit} />
         </Route>
         <Route path="/game-categories" exact>
           <GameCategoriesPage />

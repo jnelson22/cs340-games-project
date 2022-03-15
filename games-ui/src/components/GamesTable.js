@@ -14,7 +14,7 @@ function GamesTable ({games, onDelete}) {
                         <td>{game.name}</td>
                         <td>{game.min_number_player}</td>
                         <td>{game.max_number_player}</td>
-                        <td><FiEdit2 /></td>
+                        <td><FiEdit2 onEdit = {onEdit}/></td>
                         <td><FiDelete onClick={() => onDelete(game.gameID)}/></td>
                     </tr>
                 )
