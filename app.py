@@ -40,7 +40,7 @@ def delete_game(gameID):
     db.execute_query(db_connection=db_connection, query=query, query_params=(gameID,))
     return Response(status=204)
 
-@app.route('/api/edit-game/<int:gameID>', methods=["PUT"], ["POST"], ["GET"])
+@app.route('/api/edit-game/<int:gameID>', methods=["PUT", "POST", "GET"])
 def edit_game(gameID):
     print("gameID", gameID)
     db_connection = db.connect_to_database()
