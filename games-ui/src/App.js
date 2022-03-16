@@ -23,7 +23,7 @@ function App() {
         <Route path="/games" exact>
             <GamesPage setGameToEdit={setGameToEdit}/>
         </Route>
-        <Route path="/edit-game">
+        <Route path="/edit-game" exact>
             <EditGamePage gameToEdit={gameToEdit} />
         </Route>
         <Route path="/game-categories" exact>
