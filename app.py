@@ -138,15 +138,22 @@ def delete_score(scoreID):
 def gmaes_game_cat():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        query = "SELECT * from Games_Game_Categories;"
+        query = """SELECT Games.name AS game_name, Game_Categories.category AS games_cat
+                    FROM Games
+                    JOIN Games_Game_Categories
+                    ON Games.gameID = Games_Game_Categories.gameID
+                    JOIN Game_Categories
+                    ON Game_Categories.game_categoryID = Games_Game_Categories.categoryID;      
+        """
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
+        print(jsonify(results))
         return jsonify(results)
     elif request.method == 'POST':
         form_data = request.get_json()
         print(form_data)
         """ {'gameID': '1', 'gameCatID': [{'value': 4, 'label': 'board'}, {'value': 2, 'label': 'strategy'}]} """
-        gameID = form_data['gameID']
+        gameID = form_data['gameID']['value']
         gameCatID = form_data['gameCatID']
         query_values = ()
         query = "INSERT INTO Games_Game_Categories (gameID, categoryID) VALUES (%s, %s);"

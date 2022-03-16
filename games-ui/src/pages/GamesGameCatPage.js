@@ -11,8 +11,6 @@ function GamesGameCatPage() {
     const [gameID, setGameID] = useState('');
     const [gameCatID, setGameCatID] = useState(null);
     
-  
-
     const history = useHistory();
 
     const loadGamesGameCategories = async () => {
@@ -48,6 +46,9 @@ function GamesGameCatPage() {
     const gameCatOptions = gameCategories.map((gameCat, i) => (
         {value:gameCat.game_categoryID, label:gameCat.category}));
 
+    const gameNameOptions = games.map((game) => (
+        {value:game.gameID, label:game.name}));
+
     console.log(gameCatID)
 
     const addGamesGameCat = async () => {
@@ -76,15 +77,13 @@ function GamesGameCatPage() {
                 <tbody>
                         <tr className="input-table">
                             <td className="input-table">
-                            </td>
-                            <td className="input-table">
-                                <select onChange={e => setGameID(e.target.value)}>
-                                    <option value="none" selected disabled hidden>Select a Game</option>
-                                    {games.map((game, i) => (
-                                        <option value={game.gameID}>{game.name}</option>
-                                    )
-                                    )}
-                                </select>
+                                <Select
+                                    defaultValue={null}
+                                    isSearchable
+                                    name='game-name'
+                                    onChange={setGameID}
+                                    options={gameNameOptions}
+                                />
                             </td>
                             <td>
                                 <Select
@@ -99,7 +98,7 @@ function GamesGameCatPage() {
                         </tr>
                         <tr>
                             <td>
-                                <button className="add-button" type='submit' onClick={addGamesGameCat}>Add Game Categories</button>
+                                <button className="add-button" type='submit' onClick={addGamesGameCat}>Link Game and Categories</button>
                             </td>
                         </tr>
                 </tbody>
