@@ -97,7 +97,7 @@ function GamesGameCatPage() {
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td colSpan={2}>
                                 <button className="add-button" type='submit' onClick={addGamesGameCat}>Link Game and Categories</button>
                             </td>
                         </tr>
