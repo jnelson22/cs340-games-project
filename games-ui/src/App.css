@@ -75,3 +75,10 @@ tr.player-row:hover {
   color: black;
 }
 
+.edit-icon:hover {
+  color: cornflowerblue;
+}
+
+.delete-icon:hover {
+  color: orangered;
+}

@@ -7,9 +7,12 @@ import GameCategoriesPage from './pages/GameCategoriesPage';
 import GamesGameCatPage from './pages/GamesGameCatPage';
 import PlayersPage from './pages/PlayersPage';
 import ScoresPage from './pages/ScoresPage';
+import EditGamePage from './pages/EditGamePage';
 import Navigator from './components/navigation';
+import { useState } from 'react';
 
 function App() {
+  const [gameToEdit, setGameToEdit] = useState();
   return (
     <Router>
       <Navigator />
@@ -18,7 +21,10 @@ function App() {
             <HomePage />
         </Route>
         <Route path="/games" exact>
-            <GamesPage />
+            <GamesPage setGameToEdit={setGameToEdit}/>
+        </Route>
+        <Route path="/edit-game" exact>
+            <EditGamePage gameToEdit={gameToEdit} />
         </Route>
         <Route path="/game-categories" exact>
           <GameCategoriesPage />
