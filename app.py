@@ -16,6 +16,7 @@ FLASK_ENV=os.environ.get('FLASK_ENV')
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
+""" Games page API"""
 @app.route('/api/games', methods=["POST", "GET"])
 def game():
     db_connection = db.connect_to_database()
@@ -30,7 +31,7 @@ def game():
         query = "INSERT INTO Games (name, min_number_player, max_number_player) VALUES (%s, %s, %s)"
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player']))
 
-        return redirect('/games')
+        return Response(status=201)
 
 @app.route('/api/games/<int:gameID>', methods=["DELETE"])
 def delete_game(gameID):
@@ -39,11 +40,14 @@ def delete_game(gameID):
     db.execute_query(db_connection=db_connection, query=query, query_params=(gameID,))
     return Response(status=204)
 
+""" Palyers Page API """
 @app.route('/api/players', methods=["POST", "GET"])
 def player():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        query = "SELECT * from Players;"
+        query = """SELECT Players.playerID, Players.first_name, Players.last_name, Games.name AS favorite_game  
+                    FROM Players
+                    LEFT JOIN Games ON Players.favorite_game = Games.gameID;"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
         return jsonify(results)
@@ -61,7 +65,7 @@ def player():
             query = "INSERT INTO Players (first_name, last_name, favorite_game) VALUES (%s, %s, %s);"
             db.execute_query(db_connection=db_connection, query=query, query_params=(first_name, last_name, fav_game))
         
-        return redirect('/players')
+        return Response(status=201)
 
 @app.route('/api/players/<int:playerID>', methods=["DELETE"])
 def delete_player(playerID):
@@ -70,6 +74,7 @@ def delete_player(playerID):
     db.execute_query(db_connection=db_connection, query=query, query_params=(playerID,))
     return Response(status=204)
 
+""" Game Catigories Page API """
 @app.route('/api/game-categories', methods=["POST", "GET"])
 def game_cat():
     db_connection = db.connect_to_database()
@@ -84,7 +89,7 @@ def game_cat():
         print(form_data)
         print(form_data['category'])
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['category'],))
-        return redirect('/game-categories')
+        return Response(status=201)
 
 @app.route('/api/game-categories/<int:game_categoryID>', methods=["DELETE"])
 def delete_game_cat(game_categoryID):
@@ -93,14 +98,15 @@ def delete_game_cat(game_categoryID):
     db.execute_query(db_connection=db_connection, query=query, query_params=(game_categoryID,))
     return Response(status=204)
 
+""" Scores page API """
 @app.route('/api/scores', methods=["POST", "GET"])
 def scores():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) as fullName,  Games.name as game, Scores.score
-                    from Players
+        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games.name as game_name, Scores.score, Scores.scoreID
+                    FROM Players
                     JOIN Scores on Players.playerID = Scores.playerID
-                    JOIN Games on Games.gameID = Scores.gameID;"""
+                    JOIN Games on Games.gameID = Scores.gameID"""
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
         return jsonify(results)
@@ -108,10 +114,8 @@ def scores():
     elif request.method == 'POST':
         form_data = request.get_json()
         query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);"
-        print(form_data['playerID'])
-        #TODO: find the IDs based on the name
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
-        return redirect('/game-categories')
+        return Response(status=201)
 
 @app.route('/api/scores/<int:scoreID>', methods=["DELETE"])
 def delete_score(scoreID):
