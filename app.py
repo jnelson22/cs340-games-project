@@ -1,4 +1,6 @@
+from cgi import print_exception
 from crypt import methods
+import json
 import os
 from flask import Flask, Response, render_template, send_from_directory, request, jsonify, make_response, redirect, Request
 from flask_cors import CORS, cross_origin
@@ -88,8 +90,16 @@ def game_cat():
         query = "INSERT INTO Game_Categories (category) VALUES (%s);"
         print(form_data)
         print(form_data['category'])
-        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['category'],))
-        return Response(status=201)
+        category_str = form_data['category'].capitalize()
+        try:
+            db.execute_query(db_connection=db_connection, query=query, query_params=(category_str,))
+        except Exception as e:
+            if "Duplicate entry" in e.args[1]:
+                print("duplicate key")
+                return Response()
+            else:
+                print(e)
+                return Response(status=201)
 
 @app.route('/api/game-categories/<int:game_categoryID>', methods=["DELETE"])
 def delete_game_cat(game_categoryID):
@@ -123,6 +133,35 @@ def delete_score(scoreID):
     query = "DELETE FROM Scores WHERE scoreID = %s;"
     db.execute_query(db_connection=db_connection, query=query, query_params=(scoreID,))
     return Response(status=204)
+
+@app.route('/api/games-game-categories', methods=["POST", "GET"])
+def gmaes_game_cat():
+    db_connection = db.connect_to_database()
+    if request.method == 'GET':
+        query = """SELECT Games.name AS game_name, Game_Categories.category AS games_cat
+                    FROM Games
+                    JOIN Games_Game_Categories
+                    ON Games.gameID = Games_Game_Categories.gameID
+                    JOIN Game_Categories
+                    ON Game_Categories.game_categoryID = Games_Game_Categories.categoryID;      
+        """
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        print(jsonify(results))
+        return jsonify(results)
+    elif request.method == 'POST':
+        form_data = request.get_json()
+        print(form_data)
+        """ {'gameID': '1', 'gameCatID': [{'value': 4, 'label': 'board'}, {'value': 2, 'label': 'strategy'}]} """
+        gameID = form_data['gameID']['value']
+        gameCatID = form_data['gameCatID']
+        query_values = ()
+        query = "INSERT INTO Games_Game_Categories (gameID, categoryID) VALUES (%s, %s);"
+
+        for i in gameCatID:
+            print(i['value'])
+            cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(gameID, i['value']))
+        return Response(status=201)
 
 
 @app.errorhandler(404)
