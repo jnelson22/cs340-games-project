@@ -20,6 +20,7 @@ export const EditGamePage = ({gameToEdit}) => {
                 'Content-Type': 'application/json',
             },
         });
+        console.log(editedGame);
         if(response.status === 200){
             alert('successfully editied game');
         }else {
