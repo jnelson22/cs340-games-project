@@ -13,8 +13,8 @@ function ScoresTable ({scores, onDelete}) {
                         <td>{score.game_name}</td>
                         <td>{score.score}</td>
                         <td><input type="checkbox" checked/></td>
-                        <td><FiEdit2 /></td>
-                        <td><FiDelete onClick={() => onDelete(score.scoreID)}/></td>
+                        <td><FiEdit2 className="edit-icon" /></td>
+                        <td><FiDelete className="delete-icon" onClick={() => onDelete(score.scoreID)}/></td>
                     </tr>
                 )}
             </tbody>
