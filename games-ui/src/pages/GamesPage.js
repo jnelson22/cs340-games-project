@@ -3,8 +3,9 @@ import { Link, useHistory } from 'react-router-dom';
 import GamesTable from '../components/GamesTable';
 import GamesTableHead from '../components/GamesTableHead';
 import {useState, useEffect } from 'react';
+//import {useHistory} from 'react-router-dom';
 
-function GamesPage() {
+function GamesPage({setGameToEdit}) {
     const [games, setGames] = useState([]);
     const [name, setName] = useState('');
     const [min_number_player, setMin_number_player] = useState('');
@@ -48,6 +49,11 @@ function GamesPage() {
         }
     };
 
+    const onEdit = async gameToEdit => {
+        setGameToEdit(gameToEdit);
+        history.push('/edit-game');
+    }
+
 
     return (
         <>
@@ -80,7 +86,7 @@ function GamesPage() {
                 </table>
             </div>
             <br></br>
-            <GamesTable games={games} onDelete={onDelete}/>
+            <GamesTable games={games} onDelete={onDelete} onEdit={onEdit}/>
             <hr></hr>
             <div>
                 <h2>Add Game</h2>
