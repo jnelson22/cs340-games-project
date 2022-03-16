@@ -5,8 +5,8 @@ function GamesGameCatTableHead() {
     return (
         <thead>
             <tr>
-                <th>game id</th>
-                <th>game category id</th>
+                <th>Game Name</th>
+                <th>Game Category</th>
             </tr>
         </thead>
     );
