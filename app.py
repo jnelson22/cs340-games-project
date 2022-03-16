@@ -33,7 +33,7 @@ def game():
 
         return Response(status=201)
 
-@app.route('/api/games/<int:gameID>', methods=["DELETE"])
+@app.route('/api/games/<int:gameID>', methods=["DELETE", "PUT"])
 def delete_game(gameID):
     if request.method == 'DELETE':
         db_connection = db.connect_to_database()
