@@ -12,8 +12,8 @@ function PlayersTable ({players, onDelete}) {
                     <td>{player.first_name}</td>
                     <td>{player.last_name}</td>
                     <td>{player.favorite_game}</td>
-                    <td><FiEdit2 /></td>
-                    <td><FiDelete onClick={() => onDelete(player.playerID)}/></td>
+                    <td><FiEdit2 className="edit-icon" /></td>
+                    <td><FiDelete className="delete-icon" onClick={() => onDelete(player.playerID)}/></td>
                 </tr>
                 ))}
             </tbody>
