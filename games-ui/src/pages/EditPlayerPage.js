@@ -7,6 +7,7 @@ export const EditPlayerPage =({playerToEdit}) => {
     const [first_name, setFirstName] = useState(playerToEdit.first_name);
     const [last_name, setLastName] = useState(playerToEdit.last_name);
     const [favorite_game, setFavoriteGame] = useState(playerToEdit.favorite_game);
+    const [playerID] = useState(playerToEdit.playerID);
 
     const editPlayer = async () => {
         const editedPlayer = {first_name, last_name, favorite_game, playerID};
