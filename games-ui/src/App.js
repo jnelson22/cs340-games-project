@@ -12,7 +12,7 @@ import Navigator from './components/navigation';
 import { useState } from 'react';
 
 function App() {
-  const [gameToEdit, setGameToEdit] = useState();
+  const [gameToEdit, setGameToEdit, playerToEdit, setPlayerToEdit] = useState();
   return (
     <Router>
       <Navigator />
@@ -33,7 +33,10 @@ function App() {
           <GamesGameCatPage />
         </Route>
         <Route path="/players" exact>
-          <PlayersPage />
+          <PlayersPage setPlayerToEdit={setPlayerToEdit} />
+        </Route>
+        <Route path="/edit-player" exact>
+          <EditPlayerPage playerToEdit={playerToEdit} />
         </Route>
         <Route path="/scores" exact>
           <ScoresPage />
