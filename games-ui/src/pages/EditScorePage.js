@@ -43,6 +43,10 @@ export const EditScorePage = ({scoreToEdit}) => {
                 type="text"
                 value={score}
                 onChange={e => setScore(e.target.value)} />
+            <button
+                className="add-button"
+                onClick={editScore}
+            >Save</button>
         </div>
     );
 }
