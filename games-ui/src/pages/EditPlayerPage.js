@@ -11,7 +11,7 @@ export const EditPlayerPage =({playerToEdit}) => {
 
     const editPlayer = async () => {
         const editedPlayer = {first_name, last_name, favorite_game, playerID};
-        const response =await fetch(`/api/games/${playerToEdit.playerID}`, {
+        const response =await fetch(`/api/players/${playerToEdit.playerID}`, {
             method: 'PUT',
             body: JSON.stringify(editedPlayer),
             headers: {
