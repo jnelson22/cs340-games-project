@@ -5,7 +5,7 @@ import PlayersTableHead from '../components/PlayersTableHead';
 import { useState, useEffect } from 'react';
 
 
-function PlayersPage() {
+function PlayersPage({setPlayerToEdit}) {
     const [players, setPlayers] = useState([]);
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
@@ -57,6 +57,11 @@ function PlayersPage() {
         setGames(data);
     }
 
+    const onEdit = async playerToEdit => {
+        setPlayerToEdit(playerToEdit);
+        history.push('/edit-player');
+    }
+
     useEffect(() => {
         loadGames();
     }, []);
@@ -81,7 +86,7 @@ function PlayersPage() {
                 </tr>
             </table>
             <br></br>
-            <PlayersTable players={players} onDelete={onDelete}/>
+            <PlayersTable players={players} onDelete={onDelete} onEdit={onEdit}/>
             <hr></hr>
             <table className="table-edit">
                 <PlayersTableHead input="player-add"/>
