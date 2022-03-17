@@ -2,7 +2,8 @@ import React from 'react';
 import PlayersTableHead from './PlayersTableHead';
 import { FiEdit2, FiDelete } from 'react-icons/fi';
 
-function PlayersTable ({players, onDelete}) {
+function PlayersTable ({players, onDelete, onEdit}) {
+
     return (
         <table className="table-container">
             <PlayersTableHead />
@@ -12,7 +13,7 @@ function PlayersTable ({players, onDelete}) {
                     <td>{player.first_name}</td>
                     <td>{player.last_name}</td>
                     <td>{player.favorite_game}</td>
-                    <td><FiEdit2 className="edit-icon" /></td>
+                    <td><FiEdit2 className="edit-icon" onClick={() => onEdit(player)}/></td>
                     <td><FiDelete className="delete-icon" onClick={() => onDelete(player.playerID)}/></td>
                 </tr>
                 ))}
