@@ -13,7 +13,8 @@ import Navigator from './components/navigation';
 import { useState } from 'react';
 
 function App() {
-  const [gameToEdit, setGameToEdit, playerToEdit, setPlayerToEdit] = useState();
+  const [gameToEdit, setGameToEdit] = useState();
+  const [playerToEdit, setPlayerToEdit] = useState();
   return (
     <Router>
       <Navigator />

@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 
 
-function ScoresPage() {
+function ScoresPage({setScoreToEdit}) {
     const [scores, setScores] = useState([]);
     const [players, setPlayers] = useState([]);
     const [games, setGames] = useState([]);
@@ -77,6 +77,11 @@ function ScoresPage() {
         }
     };
 
+    const onEdit = async scoreToEdit => {
+        setScoreToEdit(scoreToEdit);
+        history.push('/edit-score');
+    }
+
     return (
         <>
             <h1>Scores Page</h1>
@@ -94,7 +99,7 @@ function ScoresPage() {
                 </tr>
             </table>
             <br></br>
-            <ScoresTable scores={scores} onDelete={onDelete}/>
+            <ScoresTable scores={scores} onEdit={onEdit} onDelete={onDelete}/>
             <hr></hr>
             <table className="table-edit">
                 <ScoresTableHead input="score-add"/>

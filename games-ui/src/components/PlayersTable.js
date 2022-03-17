@@ -2,7 +2,7 @@ import React from 'react';
 import PlayersTableHead from './PlayersTableHead';
 import { FiEdit2, FiDelete } from 'react-icons/fi';
 
-function PlayersTable ({players, onDelete, onEdit}) {
+function PlayersTable ({players, onEdit, onDelete}) {
 
     return (
         <table className="table-container">
