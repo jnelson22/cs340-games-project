@@ -9,6 +9,7 @@ import PlayersPage from './pages/PlayersPage';
 import ScoresPage from './pages/ScoresPage';
 import EditGamePage from './pages/EditGamePage';
 import EditPlayerPage from './pages/EditPlayerPage';
+import EditScorePage from './pages/EditScorePage';
 import Navigator from './components/navigation';
 import { useState } from 'react';
 
