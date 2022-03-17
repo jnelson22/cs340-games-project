@@ -156,6 +156,7 @@ def delete_score(scoreID):
         return Response(status=204)
     elif request.method == 'PUT':
         form_data = request.get_json()
+        print(form_data)
         query = "UPDATE Scores SET player_name=%s, game=%s, score=%s WHERE scoreID=%s;"
         db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['player_name'], form_data['game'], form_data['score'], form_data['scoreID']))
         return Response(status=200)

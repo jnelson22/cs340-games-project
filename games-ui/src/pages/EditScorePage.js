@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
+import GamesGameCatPage from './GamesGameCatPage';
+import PlayersPage from './PlayersPage';
 
 export const EditScorePage = ({scoreToEdit}) => {
 
     const history = useHistory();
 
-    const [player_name, setPlayerName] = useState(scoreToEdit.playerName);
+    const [player_name, setPlayerName] = useState(scoreToEdit.player_name);
     const [game, setGame] = useState(scoreToEdit.game);
     const [score, setScore] = useState(scoreToEdit.score);
     //const [finished_playing, setFinishedPlaying] = useState(scoreToEdit.finishedPlaying);
@@ -31,23 +33,28 @@ export const EditScorePage = ({scoreToEdit}) => {
     return (
         <div>
             <h1>Edit Score</h1>
-            <input
-                type="text"
-                value={player_name}
-                onChange={e => setPlayerName(e.target.value)} />
-            <input
-                type="text"
-                value={game}
-                onChange={e => setGame(e.target.value)} />
-            <input
-                type="text"
-                value={score}
-                placeholder="enter score"
-                onChange={e => setScore(e.target.value)} />
-            <button
-                className="add-button"
-                onClick={editScore}
-            >Save</button>
+            <form>
+                <select onChange={e => setPlayerID(e.target.value)}>
+                    <option value="none" selected disabled hidden>Select a Player</option>
+                    {players.map((player, i) => (
+                        <option value={player.playerID}>{player.first_name} {player.last_name}</option>
+                    ))}
+                </select>
+                <select onChange={e => setGameID(e.target.value)}>
+                    <option value="none" selected disabled hidden>Select a Game</option>
+                    {games.map((game, i) => (
+                        <option value={game.gameID}>{game.name}</option>
+                    ))}
+                </select>
+                <input
+                    type="number"
+                    placeholder='Enter Score'
+                    onChange={e=> setScore(e.target.value)}
+                />
+                <button className="add-button" type='submit' onClick={editScore}>
+                    Save
+                </button>
+            </form>
         </div>
     );
 }
