@@ -22,7 +22,7 @@ export const EditGamePage = ({gameToEdit}) => {
         });
         console.log(editedGame);
         if(response.status === 200){
-            alert('successfully editied game');
+            alert('successfully edited game');
         }else {
             alert(`failed to edit game, status code =${response.status}`);
         }

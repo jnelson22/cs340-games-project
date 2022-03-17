@@ -58,6 +58,7 @@ export const EditScorePage = ({scoreToEdit}) => {
                 'Content-Type': 'application/json',
             },
         });
+        console.log(editedScore);
         if(response.status === 200){
             alert('successfully updated score');
         }else{

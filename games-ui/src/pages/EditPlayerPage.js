@@ -6,11 +6,12 @@ export const EditPlayerPage =({playerToEdit}) => {
     const history = useHistory();
     const [first_name, setFirstName] = useState(playerToEdit.first_name);
     const [last_name, setLastName] = useState(playerToEdit.last_name);
-    const [favorite_game, setFavoriteGame] = useState(playerToEdit.favorite_game);
+    //const [favorite_game, setFavoriteGame] = useState(playerToEdit.favorite_game);
     const [playerID] = useState(playerToEdit.playerID);
+    const [gameID, setGameID] = useState('');
 
     const editPlayer = async () => {
-        const editedPlayer = {first_name, last_name, favorite_game, playerID};
+        const editedPlayer = {first_name, last_name, gameID, playerID};
         const response =await fetch(`/api/players/${playerToEdit.playerID}`, {
             method: 'PUT',
             body: JSON.stringify(editedPlayer),
@@ -37,11 +38,13 @@ export const EditPlayerPage =({playerToEdit}) => {
                 type="text"
                 value={last_name}
                 onChange={e => setLastName(e.target.value)} />
-            <input
-                type="text"
-                value={favorite_game}
-                placeholder="enter favorite game"
-                onChange={e => setFavoriteGame(e.target.value)} />
+            <select onChange={e => setGameID(e.target.value)}>
+                <option value="none" selected disabled hidden>Select a game</option>
+                {games.map((game, i) => (
+                    <option value={game.gameID}>{game.name}</option>
+                )
+                )}
+            </select>
             <button
                 className="add-button"
                 onClick={editPlayer}
