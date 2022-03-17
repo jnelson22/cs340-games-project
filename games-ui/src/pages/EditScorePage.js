@@ -10,9 +10,10 @@ export const EditScorePage = ({scoreToEdit}) => {
     //const [playerID, setPlayerID] = useState(scoreToEdit.playerID);
     const [players, setPlayers] = useState([]);
     const [games, setGames] = useState([]);
-    //const [gameID, setGameID] = useState('');
+    const [gameID, setGameID] = useState('');
+    const [playerID, setPlayerID] = useState('');
     const [player_name, setPlayerName] = useState(scoreToEdit.player_name);
-    const [game_name, setGameName] = useState(scoreToEdit.game);
+    const [game_name, setGameName] = useState(scoreToEdit.game_name);
     const [score, setScore] = useState(scoreToEdit.score);
     //const [finished_playing, setFinishedPlaying] = useState(scoreToEdit.finishedPlaying);
     const [scoreID] = useState(scoreToEdit.scoreID);
@@ -49,7 +50,7 @@ export const EditScorePage = ({scoreToEdit}) => {
     }, []);
 
     const editScore = async () => {
-        const editedScore = {player_name, game_name, score, scoreID};
+        const editedScore = {playerID, gameID, score, scoreID};
         const response= await fetch(`api/scores/${scoreToEdit.scoreID}`, {
             method: 'PUT',
             body: JSON.stringify(editedScore),
