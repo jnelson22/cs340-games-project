@@ -70,7 +70,6 @@ export const EditScorePage = ({scoreToEdit}) => {
     return (
         <div>
             <h1>Edit Score</h1>
-            <form>
                 <select onChange={e => setPlayerID(e.target.value)}>
                     <option value="none" selected disabled hidden>Select a Player</option>
                     {players.map((player, i) => (
@@ -92,7 +91,6 @@ export const EditScorePage = ({scoreToEdit}) => {
                 <button className="add-button" type='submit' onClick={editScore}>
                     Save
                 </button>
-            </form>
         </div>
     );
 }
