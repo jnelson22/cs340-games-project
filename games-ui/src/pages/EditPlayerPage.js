@@ -24,10 +24,28 @@ export const EditPlayerPage =({playerToEdit}) => {
             alert(`failed to edit player, status code=${response.status}`);
         }
         history.push('/');
-    }
+    };
+
     return (
-        <>
-        </>
+        <div>
+            <h1>Edit Player</h1>
+            <input
+                type="text"
+                value={first_name}
+                onChange={e => setFirstName(e.target.value)} />
+            <input 
+                type="text"
+                value={last_name}
+                onChange={e => setLastName(e.target.value)} />
+            <input
+                type="text"
+                value={favorite_game}
+                onChange={e => setFavoriteGame(e.target.value)} />
+            <button
+                className="add-button"
+                onClick={editPlayer}
+            >Save</button>
+        </div>
     );
 }
 
