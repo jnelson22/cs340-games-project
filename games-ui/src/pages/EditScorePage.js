@@ -1,17 +1,49 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import GamesGameCatPage from './GamesGameCatPage';
 import PlayersPage from './PlayersPage';
 
-export const EditScorePage = ({scoreToEdit}) => {
+export const EditScorePage = ({scoreToEdit, setScores, setGames}) => {
 
     const history = useHistory();
 
+    //const [playerID, setPlayerID] = useState(scoreToEdit.playerID);
     const [player_name, setPlayerName] = useState(scoreToEdit.player_name);
     const [game, setGame] = useState(scoreToEdit.game);
     const [score, setScore] = useState(scoreToEdit.score);
     //const [finished_playing, setFinishedPlaying] = useState(scoreToEdit.finishedPlaying);
     const [scoreID] = useState(scoreToEdit.scoreID);
+
+    const loadScores = async () => {
+        const response = await fetch('/api/scores');
+        const data = await response.json();
+        setScores(data);
+        console.log(data);
+    }
+
+    useEffect(() => {
+        loadScores();
+    }, []);
+
+    const loadPlayers = async () => {
+        const response = await fetch('/api/players');
+        const data = await response.json();
+        setPlayers(data);
+    }
+
+    useEffect(() => {
+        loadPlayers();
+    }, []);
+
+    const loadGames = async () => {
+        const response = await fetch('/api/games');
+        const data = await response.json();
+        setGames(data);
+    }
+
+    useEffect(() => {
+        loadGames();
+    }, []);
 
     const editScore = async () => {
         const editedScore = {player_name, game, score, scoreID};
@@ -34,7 +66,7 @@ export const EditScorePage = ({scoreToEdit}) => {
         <div>
             <h1>Edit Score</h1>
             <form>
-                <select onChange={e => setPlayerID(e.target.value)}>
+                <select onChange={e => setPlayerName(e.target.value)}>
                     <option value="none" selected disabled hidden>Select a Player</option>
                     {players.map((player, i) => (
                         <option value={player.playerID}>{player.first_name} {player.last_name}</option>
