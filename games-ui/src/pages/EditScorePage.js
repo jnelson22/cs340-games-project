@@ -10,9 +10,9 @@ export const EditScorePage = ({scoreToEdit}) => {
     //const [playerID, setPlayerID] = useState(scoreToEdit.playerID);
     const [players, setPlayers] = useState([]);
     const [games, setGames] = useState([]);
-    const [gameID, setGameID] = useState('');
+    //const [gameID, setGameID] = useState('');
     const [player_name, setPlayerName] = useState(scoreToEdit.player_name);
-    const [game, setGame] = useState(scoreToEdit.game);
+    const [game_name, setGameName] = useState(scoreToEdit.game);
     const [score, setScore] = useState(scoreToEdit.score);
     //const [finished_playing, setFinishedPlaying] = useState(scoreToEdit.finishedPlaying);
     const [scoreID] = useState(scoreToEdit.scoreID);
@@ -49,7 +49,7 @@ export const EditScorePage = ({scoreToEdit}) => {
     }, []);
 
     const editScore = async () => {
-        const editedScore = {player_name, game, score, scoreID};
+        const editedScore = {player_name, game_name, score, scoreID};
         const response= await fetch(`api/scores/${scoreToEdit.scoreID}`, {
             method: 'PUT',
             body: JSON.stringify(editedScore),
@@ -69,14 +69,13 @@ export const EditScorePage = ({scoreToEdit}) => {
         <div>
             <h1>Edit Score</h1>
             <form>
-                console.log("form");
                 <select onChange={e => setPlayerName(e.target.value)}>
                     <option value="none" selected disabled hidden>Select a Player</option>
                     {players.map((player, i) => (
                         <option value={player.playerID}>{player.first_name} {player.last_name}</option>
                     ))}
                 </select>
-                <select onChange={e => setGameID(e.target.value)}>
+                <select onChange={e => setGameName(e.target.value)}>
                     <option value="none" selected disabled hidden>Select a Game</option>
                     {games.map((game, i) => (
                         <option value={game.gameID}>{game.name}</option>
