@@ -69,6 +69,7 @@ export const EditScorePage = ({scoreToEdit}) => {
         <div>
             <h1>Edit Score</h1>
             <form>
+                console.log("form");
                 <select onChange={e => setPlayerName(e.target.value)}>
                     <option value="none" selected disabled hidden>Select a Player</option>
                     {players.map((player, i) => (
