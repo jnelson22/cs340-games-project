@@ -51,3 +51,11 @@ SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games
 FROM Players
 JOIN Scores on Players.playerID = Scores.playerID
 JOIN Games on Games.gameID = Scores.gameID
+
+-- query to get the game name and cat 
+SELECT Games.name AS game_name, Game_Categories.category AS games_cat
+FROM Games
+JOIN Games_Game_Categories
+ON Games.gameID = Games_Game_Categories.gameID
+JOIN Game_Categories
+ON Game_Categories.game_categoryID = Games_Game_Categories.categoryID
