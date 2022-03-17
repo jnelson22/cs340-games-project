@@ -159,7 +159,7 @@ def delete_score(scoreID):
         form_data = request.get_json()
         print(form_data)
         query = "UPDATE Scores SET playerID=%s, gameID=%s, score=%s WHERE scoreID=%s;"
-        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['player_name'], form_data['game_name'], form_data['score'], form_data['scoreID']))
+        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score'], form_data['scoreID']))
         return Response(status=200)
 
 

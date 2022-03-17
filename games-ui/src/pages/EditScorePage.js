@@ -58,7 +58,7 @@ export const EditScorePage = ({scoreToEdit}) => {
                 'Content-Type': 'application/json',
             },
         });
-        if(response.status == 200){
+        if(response.status === 200){
             alert('successfully updated score');
         }else{
             alert(`failed to edit score, status code=${response.status}`);
@@ -70,13 +70,13 @@ export const EditScorePage = ({scoreToEdit}) => {
         <div>
             <h1>Edit Score</h1>
             <form>
-                <select onChange={e => setPlayerName(e.target.value)}>
+                <select onChange={e => setPlayerID(e.target.value)}>
                     <option value="none" selected disabled hidden>Select a Player</option>
                     {players.map((player, i) => (
                         <option value={player.playerID}>{player.first_name} {player.last_name}</option>
                     ))}
                 </select>
-                <select onChange={e => setGameName(e.target.value)}>
+                <select onChange={e => setGameID(e.target.value)}>
                     <option value="none" selected disabled hidden>Select a Game</option>
                     {games.map((game, i) => (
                         <option value={game.gameID}>{game.name}</option>
