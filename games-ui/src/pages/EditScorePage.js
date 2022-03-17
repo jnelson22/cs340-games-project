@@ -3,27 +3,30 @@ import { useHistory } from "react-router-dom";
 import GamesGameCatPage from './GamesGameCatPage';
 import PlayersPage from './PlayersPage';
 
-export const EditScorePage = ({scoreToEdit, setScores, setGames}) => {
+export const EditScorePage = ({scoreToEdit}) => {
 
     const history = useHistory();
 
     //const [playerID, setPlayerID] = useState(scoreToEdit.playerID);
+    const [players, setPlayers] = useState([]);
+    const [games, setGames] = useState([]);
+    const [gameID, setGameID] = useState('');
     const [player_name, setPlayerName] = useState(scoreToEdit.player_name);
     const [game, setGame] = useState(scoreToEdit.game);
     const [score, setScore] = useState(scoreToEdit.score);
     //const [finished_playing, setFinishedPlaying] = useState(scoreToEdit.finishedPlaying);
     const [scoreID] = useState(scoreToEdit.scoreID);
 
-    const loadScores = async () => {
-        const response = await fetch('/api/scores');
-        const data = await response.json();
-        setScores(data);
-        console.log(data);
-    }
+    //const loadScores = async () => {
+    //    const response = await fetch('/api/scores');
+    //    const data = await response.json();
+    //    setScores(data);
+   //     console.log(data);
+    //}
 
-    useEffect(() => {
-        loadScores();
-    }, []);
+    //useEffect(() => {
+    //    loadScores();
+    //}, []);
 
     const loadPlayers = async () => {
         const response = await fetch('/api/players');
