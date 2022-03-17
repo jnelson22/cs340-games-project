@@ -6,7 +6,6 @@ import {useState} from 'react';
 function GamesTable ({games, onEdit, onDelete}) {
     console.log(games)
     
-    const [isChanged, setIsChanged] = useState(false);
     return (
         <table className="table-container">
             <GamesTableHead />

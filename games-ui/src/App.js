@@ -8,11 +8,15 @@ import GamesGameCatPage from './pages/GamesGameCatPage';
 import PlayersPage from './pages/PlayersPage';
 import ScoresPage from './pages/ScoresPage';
 import EditGamePage from './pages/EditGamePage';
+import EditPlayerPage from './pages/EditPlayerPage';
+import EditScorePage from './pages/EditScorePage';
 import Navigator from './components/navigation';
 import { useState } from 'react';
 
 function App() {
   const [gameToEdit, setGameToEdit] = useState();
+  const [playerToEdit, setPlayerToEdit] = useState();
+  const [scoreToEdit, setScoreToEdit] = useState();
   return (
     <Router>
       <Navigator />
@@ -33,10 +37,16 @@ function App() {
           <GamesGameCatPage />
         </Route>
         <Route path="/players" exact>
-          <PlayersPage />
+          <PlayersPage setPlayerToEdit={setPlayerToEdit} />
+        </Route>
+        <Route path="/edit-player" exact>
+          <EditPlayerPage playerToEdit={playerToEdit} />
         </Route>
         <Route path="/scores" exact>
-          <ScoresPage />
+          <ScoresPage setScoreToEdit={setScoreToEdit}/>
+        </Route>
+        <Route path="/edit-score" exact>
+          <EditScorePage scoreToEdit={scoreToEdit}/>
         </Route>
       </main>
     </Router>

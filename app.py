@@ -94,12 +94,19 @@ def player():
         
         return Response(status=201)
 
-@app.route('/api/players/<int:playerID>', methods=["DELETE"])
+@app.route('/api/players/<int:playerID>', methods=["DELETE", "PUT"])
 def delete_player(playerID):
     db_connection = db.connect_to_database()
-    query = "DELETE FROM Players WHERE playerID = %s;"
-    db.execute_query(db_connection=db_connection, query=query, query_params=(playerID,))
-    return Response(status=204)
+    if request.method == 'DELETE':
+        query = "DELETE FROM Players WHERE playerID = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(playerID,))
+        return Response(status=204)
+    elif request.method == 'PUT':
+        form_data = request.get_json()
+        print(form_data)
+        query = "UPDATE Players SET first_name=%s, last_name=%s, favorite_game=%s WHERE playerID=%s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['first_name'], form_data['last_name'], form_data['gameID'], form_data['playerID']))
+        return Response(status=200)
 
 """ Game Catigories Page API """
 @app.route('/api/game-categories', methods=["POST", "GET"])
@@ -148,16 +155,24 @@ def scores():
         
     elif request.method == 'POST':
         form_data = request.get_json()
+        print(form_data)
         query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);"
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
         return Response(status=201)
 
-@app.route('/api/scores/<int:scoreID>', methods=["DELETE"])
+@app.route('/api/scores/<int:scoreID>', methods=["DELETE", "PUT"])
 def delete_score(scoreID):
     db_connection = db.connect_to_database()
-    query = "DELETE FROM Scores WHERE scoreID = %s;"
-    db.execute_query(db_connection=db_connection, query=query, query_params=(scoreID,))
-    return Response(status=204)
+    if request.method == 'DELETE':
+        query = "DELETE FROM Scores WHERE scoreID = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(scoreID,))
+        return Response(status=204)
+    elif request.method == 'PUT':
+        form_data = request.get_json()
+        print(form_data)
+        query = "UPDATE Scores SET playerID=%s, gameID=%s, score=%s WHERE scoreID=%s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score'], form_data['scoreID']))
+        return Response(status=200)
 
 @app.route('/api/games-game-categories', methods=["POST", "GET"])
 def gmaes_game_cat():
