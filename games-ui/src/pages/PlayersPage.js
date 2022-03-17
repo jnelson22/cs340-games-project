@@ -51,10 +51,10 @@ function PlayersPage({setPlayerToEdit}) {
         }
     };
 
-    const loadGames = async () => {
-        const response = await fetch('/api/games');
+    const loadPlayers = async () => {
+        const response = await fetch('/api/players');
         const data = await response.json();
-        setGames(data);
+        setPlayers(data);
     }
 
     const onEdit = async playerToEdit => {

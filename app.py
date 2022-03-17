@@ -91,12 +91,18 @@ def player():
         
         return Response(status=201)
 
-@app.route('/api/players/<int:playerID>', methods=["DELETE"])
+@app.route('/api/players/<int:playerID>', methods=["DELETE", "PUT"])
 def delete_player(playerID):
     db_connection = db.connect_to_database()
-    query = "DELETE FROM Players WHERE playerID = %s;"
-    db.execute_query(db_connection=db_connection, query=query, query_params=(playerID,))
-    return Response(status=204)
+    if request.method == 'DELETE':
+        query = "DELETE FROM Players WHERE playerID = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(playerID,))
+        return Response(status=204)
+    elif request.method == 'PUT':
+        form_data = request.get_json()
+        query = "UPDATE Players SET first_name=%s, last_name=%s, favorite_game=%s WHERE playerID=%s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['first_name'], form_data['last_name'], form_data['favorite_game'], form_data['playerID']))
+        return Response(status=200)
 
 """ Game Catigories Page API """
 @app.route('/api/game-categories', methods=["POST", "GET"])
