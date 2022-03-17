@@ -16,7 +16,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE `Games` (
   `gameID` int(11) AUTO_INCREMENT NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `name` varchar(100) UNIQUE NOT NULL,
   `min_number_player` int DEFAULT NULL,
   `max_number_player` int DEFAULT NULL,
   PRIMARY KEY (`gameID`)

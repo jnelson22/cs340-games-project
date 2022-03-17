@@ -2,6 +2,7 @@ from cgi import print_exception
 from crypt import methods
 import json
 import os
+import re
 from flask import Flask, Response, render_template, send_from_directory, request, jsonify, make_response, redirect, Request
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
@@ -31,7 +32,7 @@ def game():
         print(request.get_json())
         form_data = request.get_json()
         query = "INSERT INTO Games (name, min_number_player, max_number_player) VALUES (%s, %s, %s)"
-        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player']))
+        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player']))
 
         return Response(status=201)
 
@@ -151,15 +152,11 @@ def gmaes_game_cat():
         return jsonify(results)
     elif request.method == 'POST':
         form_data = request.get_json()
-        print(form_data)
-        """ {'gameID': '1', 'gameCatID': [{'value': 4, 'label': 'board'}, {'value': 2, 'label': 'strategy'}]} """
         gameID = form_data['gameID']['value']
         gameCatID = form_data['gameCatID']
-        query_values = ()
         query = "INSERT INTO Games_Game_Categories (gameID, categoryID) VALUES (%s, %s);"
 
         for i in gameCatID:
-            print(i['value'])
             cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(gameID, i['value']))
         return Response(status=201)
 
