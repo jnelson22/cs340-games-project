@@ -8,7 +8,18 @@ export const EditPlayerPage =({playerToEdit}) => {
     const [last_name, setLastName] = useState(playerToEdit.last_name);
     //const [favorite_game, setFavoriteGame] = useState(playerToEdit.favorite_game);
     const [playerID] = useState(playerToEdit.playerID);
+    const [games, setGames] = useState([]);
     const [gameID, setGameID] = useState('');
+
+    const loadGames = async () => {
+        const response = await fetch('/api/games');
+        const data = await response.json();
+        setGames(data);
+    }
+
+    useEffect(() => {
+        loadGames();
+    }, []);
 
     const editPlayer = async () => {
         const editedPlayer = {first_name, last_name, gameID, playerID};
