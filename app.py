@@ -102,7 +102,7 @@ def delete_player(playerID):
         form_data = request.get_json()
         print(form_data)
         query = "UPDATE Players SET first_name=%s, last_name=%s, favorite_game=%s WHERE playerID=%s;"
-        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['first_name'], form_data['last_name'], form_data['favorite_game'], form_data['playerID']))
+        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['first_name'], form_data['last_name'], form_data['gameID'], form_data['playerID']))
         return Response(status=200)
 
 """ Game Catigories Page API """
