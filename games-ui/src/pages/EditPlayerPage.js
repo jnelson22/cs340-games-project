@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 
@@ -66,14 +65,4 @@ export const EditPlayerPage =({playerToEdit}) => {
 }
 
 export default EditPlayerPage;
-=======
-import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
 
-export const EditPlayerPage = ({playerToEdit}) => {
-
-    const history = useHistory();
-
-    const
-}
->>>>>>> b02971e9e9ce88fdee9e80737e8ada35a848c36a
