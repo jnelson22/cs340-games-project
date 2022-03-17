@@ -15,6 +15,7 @@ import { useState } from 'react';
 function App() {
   const [gameToEdit, setGameToEdit] = useState();
   const [playerToEdit, setPlayerToEdit] = useState();
+  const [scoreToEdit, setScoreToEdit] = useState();
   return (
     <Router>
       <Navigator />
@@ -41,7 +42,10 @@ function App() {
           <EditPlayerPage playerToEdit={playerToEdit} />
         </Route>
         <Route path="/scores" exact>
-          <ScoresPage />
+          <ScoresPage setScoreToEdit={setScoreToEdit}/>
+        </Route>
+        <Route path="/edit-score" exact>
+          <EditScorePage scoreToEdit={scoreToEdit}/>
         </Route>
       </main>
     </Router>
