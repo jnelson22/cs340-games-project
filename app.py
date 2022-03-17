@@ -147,12 +147,18 @@ def scores():
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
         return Response(status=201)
 
-@app.route('/api/scores/<int:scoreID>', methods=["DELETE"])
+@app.route('/api/scores/<int:scoreID>', methods=["DELETE", "PUT"])
 def delete_score(scoreID):
     db_connection = db.connect_to_database()
-    query = "DELETE FROM Scores WHERE scoreID = %s;"
-    db.execute_query(db_connection=db_connection, query=query, query_params=(scoreID,))
-    return Response(status=204)
+    if request.method == 'DELETE':
+        query = "DELETE FROM Scores WHERE scoreID = %s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(scoreID,))
+        return Response(status=204)
+    elif request.method == 'PUT':
+        form_data = request.get_json()
+        query = "UPDATE Scores SET player_name=%s, game=%s, score=%s WHERE scoreID=%s;"
+        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['player_name'], form_data['game'], form_data['score'], form_data['scoreID']))
+        return Response(status=200)
 
 
 @app.errorhandler(404)

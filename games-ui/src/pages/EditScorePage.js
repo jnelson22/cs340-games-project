@@ -42,6 +42,7 @@ export const EditScorePage = ({scoreToEdit}) => {
             <input
                 type="text"
                 value={score}
+                placeholder="enter score"
                 onChange={e => setScore(e.target.value)} />
             <button
                 className="add-button"

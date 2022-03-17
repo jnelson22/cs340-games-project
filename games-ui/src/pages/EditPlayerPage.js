@@ -40,6 +40,7 @@ export const EditPlayerPage =({playerToEdit}) => {
             <input
                 type="text"
                 value={favorite_game}
+                placeholder="enter favorite game"
                 onChange={e => setFavoriteGame(e.target.value)} />
             <button
                 className="add-button"
