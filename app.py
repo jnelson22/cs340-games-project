@@ -3,6 +3,7 @@ from crypt import methods
 import json
 import os
 import re
+from sqlite3 import paramstyle
 from flask import Flask, Response, render_template, send_from_directory, request, jsonify, make_response, redirect, Request
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
@@ -31,8 +32,11 @@ def game():
     elif request.method == 'POST':
         print(request.get_json())
         form_data = request.get_json()
+        game_name = form_data['name'].capitalize()
+        min_players = form_data['min_number_player']
+        max_players = form_data['max_number_player']
         query = "INSERT INTO Games (name, min_number_player, max_number_player) VALUES (%s, %s, %s)"
-        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player']))
+        db.execute_query(db_connection=db_connection, query=query, query_params=(game_name, min_players, max_players))
 
         return Response(status=201)
 
@@ -50,22 +54,39 @@ def delete_game(gameID):
         db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player'], form_data['gameID']))
         return Response(status=200)
 
+@app.route('/api/games-fliter', methods=["POST"])
+def game_search():
+    db_connection = db.connect_to_database()
+    if request.method == 'POST':
+        print(request.get_json())
+        form_data = request.get_json()
+        query = "SELECT * from Games WHERE"
+        q_params = 0
+        for key, data in form_data.items():
+            if data != '':
+                if key == 'gameSerach':
+                    data = data.capitalize()
+                    key = 'name'
+                elif key == 'gameMinPlayerSerach':
+                    key = 'min_number_player'
+                elif key == 'gameMaxPlayerSerach':
+                    key = 'max_number_player'
+                if q_params == 0:
+                    query += f" {key} = '{data}'"
+                    q_params += 1
+                else:
+                    query += f" AND {key} = '{data}'"
 
-#@app.route('/api/games/<int:gameID>', methods=["PUT", "POST", "GET"])
-#def edit_game(gameID):
-#    print("gameID", gameID)
-#    db_connection = db.connect_to_database()
-#    if request.method == 'POST':
-##        print("update game")
-#        query = "UPDATE Games SET name=%s, min_number_player=%s, max_number_player=%s WHERE gameID=%s;"
-#        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player'], form_data['gameID']))
-#        return Response(status=200)
-#    elif request.method =='PUT':
-#        print("update game")
-#        query = "UPDATE Games SET name=%s, min_number_player=%s, max_number_player=%s WHERE gameID=%s;"
-#        cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['name'], form_data['min_number_player'], form_data['max_number_player'], form_data['gameID']))
-#        return Response(status=200)
-
+        if query == 'SELECT * from Games WHERE':
+            query = "SELECT * from Games;"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        response = app.response_class(
+            response=json.dumps(results),
+            status=201,
+            mimetype='application/json'
+        )
+        return response
 
 """ Palyers Page API """
 @app.route('/api/players', methods=["POST", "GET"])

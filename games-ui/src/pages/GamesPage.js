@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import GamesTable from '../components/GamesTable';
 import GamesTableHead from '../components/GamesTableHead';
 import {useState, useEffect } from 'react';
@@ -11,6 +11,9 @@ function GamesPage({setGameToEdit}) {
     const [min_number_player, setMin_number_player] = useState('');
     const [max_number_player, setMax_number_player] = useState('');
     const [gameSerach, setGameSearch] = useState('');
+    const [gameMinPlayerSerach, setGameMinPlayerSerach] = useState('');
+    const [gameMaxPlayerSerach, setGameMaxPlayerSerach] = useState('');
+
 
     const history = useHistory();
 
@@ -40,7 +43,6 @@ function GamesPage({setGameToEdit}) {
     };
 
     const onDelete = async gameID => {
-        console.log(gameID)
         const response = await fetch(`/api/games/${gameID}`, { method: 'DELETE' });
         if (response.status === 204) {
             const newGames = games.filter(m => m.gameID !== gameID);
@@ -55,13 +57,27 @@ function GamesPage({setGameToEdit}) {
         history.push('/edit-game');
     }
 
-    const gameNameSearch = () => {
-        
-        const gameFilter = games.filter(m => m.name.toLowerCase() === gameSerach.toLowerCase());
-        setGames(gameFilter);
+    const gameSearch = async () => {
+        const gameFilter = {gameSerach, gameMinPlayerSerach, gameMaxPlayerSerach};
+        const response = await fetch('/api/games-fliter', {
+            method: 'POST',
+            body: JSON.stringify(gameFilter),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        if (response.status === 201) {
+            const data = await response.json()
+            setGames(data)
+        }
     }
 
-    console.log(gameSerach)
+    const clearSearch = () => {
+        setGameSearch('')
+        setGameMinPlayerSerach('')
+        setGameMaxPlayerSerach('')
+        loadGames()
+    }
 
     return (
         <>
@@ -81,16 +97,25 @@ function GamesPage({setGameToEdit}) {
                             <input
                                 type="number"
                                 placeholder="Min # of Players"
+                                min="1"
+                                value={gameMinPlayerSerach}
+                                onChange={e => setGameMinPlayerSerach(e.target.value)}
                             />
                         </td>
                         <td>
                             <input
                                 type="number"
                                 placeholder="Max # of Players"
+                                min="1"
+                                value={gameMaxPlayerSerach}
+                                onChange={e => setGameMaxPlayerSerach(e.target.value)}
                             />
                         </td>
                         <td>
-                            <button type='submit' className="add-button" onClick={gameNameSearch}>Search</button>
+                            <button type='submit' className="add-button" onClick={gameSearch}>Search</button>
+                        </td>
+                        <td>
+                            <button type='submit' className="add-button" onClick={clearSearch}>Clear</button>
                         </td>
                     </tr>
                 </table>
