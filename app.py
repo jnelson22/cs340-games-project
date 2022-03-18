@@ -146,7 +146,7 @@ def delete_game_cat(game_categoryID):
 def scores():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games.name as game_name, Scores.score, Scores.scoreID
+        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games.name as game_name, Scores.score, Scores.scoreID, Scores.finished_playing
                     FROM Players
                     JOIN Scores on Players.playerID = Scores.playerID
                     JOIN Games on Games.gameID = Scores.gameID"""

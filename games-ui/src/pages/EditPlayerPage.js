@@ -65,4 +65,3 @@ export const EditPlayerPage =({playerToEdit}) => {
 }
 
 export default EditPlayerPage;
-
