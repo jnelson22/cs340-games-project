@@ -171,11 +171,16 @@ def delete_score(scoreID):
     elif request.method == 'PUT':
         form_data = request.get_json()
         print(form_data)
-        x = json.loads(form_data)
-        print(x)
-        query = "UPDATE Scores SET playerID=%s, gameID=%s, score=%s WHERE scoreID=%s;"
-        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score'], form_data['scoreID']))
-        return Response(status=200)
+        # for updating but does not include the finished playing checkbox
+        if len(form_data) > 1:
+            query = "UPDATE Scores SET playerID=%s, gameID=%s, score=%s WHERE scoreID=%s;"
+            db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score'], form_data['scoreID']))
+            return Response(status=200)
+        # for updating the finished playing checkbox
+        elif len(form_data == 1):
+            query = "UPDATE Scores SET finished_playing=%s;"
+            db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['finished_playing']))
+            return Response(status=200)
 
 @app.route('/api/games-game-categories', methods=["POST", "GET"])
 def gmaes_game_cat():
