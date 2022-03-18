@@ -40,23 +40,23 @@ function GameCategoriesPage() {
 
     const onDelete = async game_categoryID => {
         console.log(game_categoryID)
-        const response = await fetch(`/api/games/${game_categoryID}`, { method: 'DELETE' });
+        const response = await fetch(`/api/game-categories/${game_categoryID}`, { method: 'DELETE' });
         if (response.status === 204) {
-            const newCategories = category.filter(m => m.game_categoryID !== game_categoryID);
+            const newCategories = gameCategories.filter(m => m.game_categoryID !== game_categoryID);
             setGameCategories(newCategories);
         } else {
-            console.log(`Failed to delete movie with _id ${game_categoryID}, status code = ${response.status}`)
+            console.log(`Failed to delete movie with id ${game_categoryID}, status code = ${response.status}`)
         }
     };
 
     return (
         <>
             <h1>Game Categories</h1>
-                <GameCategoriesTable gameCategories={gameCategories}/>
+                <GameCategoriesTable gameCategories={gameCategories} onDelete={onDelete}/>
             <hr></hr>
             <div>
                 <table className="table-edit">
-                    <GameCategoriesTableHead />
+                    <GameCategoriesTableHead input={'add'} />
                     <tbody>
                         <tr className="input-table">
                             <td className="input-table">
@@ -69,7 +69,7 @@ function GameCategoriesPage() {
                         </tr>
                         <tr>
                             <td colSpan= "5">
-                                <button type='submit' className="add-button" onClick={addGameCat}>Add</button>
+                                <button type='submit' className="add-button" onClick={addGameCat}>Add New Game Category</button>
                             </td>
                         </tr>
                     </tbody>
