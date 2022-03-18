@@ -10,6 +10,7 @@ function GamesPage({setGameToEdit}) {
     const [name, setName] = useState('');
     const [min_number_player, setMin_number_player] = useState('');
     const [max_number_player, setMax_number_player] = useState('');
+    const [gameSerach, setGameSearch] = useState('');
 
     const history = useHistory();
 
@@ -54,6 +55,13 @@ function GamesPage({setGameToEdit}) {
         history.push('/edit-game');
     }
 
+    const gameNameSearch = () => {
+        
+        const gameFilter = games.filter(m => m.name.toLowerCase() === gameSerach.toLowerCase());
+        setGames(gameFilter);
+    }
+
+    console.log(gameSerach)
 
     return (
         <>
@@ -65,6 +73,8 @@ function GamesPage({setGameToEdit}) {
                             <input
                                 type="text"
                                 placeholder="Game Name"
+                                value={gameSerach}
+                                onChange={e => setGameSearch(e.target.value)}
                             />
                         </td>
                         <td>
@@ -80,7 +90,7 @@ function GamesPage({setGameToEdit}) {
                             />
                         </td>
                         <td>
-                            <button>Search</button>
+                            <button type='submit' className="add-button" onClick={gameNameSearch}>Search</button>
                         </td>
                     </tr>
                 </table>
