@@ -146,7 +146,7 @@ def delete_game_cat(game_categoryID):
 def scores():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games.name as game_name, Scores.score, Scores.scoreID
+        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games.name as game_name, Scores.score, Scores.finished_playing, Scores.scoreID
                     FROM Players
                     JOIN Scores on Players.playerID = Scores.playerID
                     JOIN Games on Games.gameID = Scores.gameID"""
@@ -157,7 +157,7 @@ def scores():
     elif request.method == 'POST':
         form_data = request.get_json()
         print(form_data)
-        query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);"
+        query = "INSERT INTO Scores (playerID, gameID, score, finished_playing) VALUES (%s, %s, %s, 0);"
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
         return Response(status=201)
 

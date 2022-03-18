@@ -8,11 +8,17 @@ function ScoresTable ({scoreToEdit, scores, onEdit, onDelete}) {
 
     const history = useHistory();
 
-    const [finished_playing, setFinishedPlaying] = useState(0);
+    const [finished_playing, setFinishedPlaying] = useState(scoreToEdit.finished_playing);
 
     const editFinishedPlaying = async () => {
         console.log('checkbox toggled');
         const finishedPlayingVal = {finished_playing};
+        if(finishedPlayingVal == 0){
+            finishedPlayingVal = 1;
+        }else{
+            finishedPlayingVal = 0;
+        }
+
         const response= await fetch(`api/scores/${scoreToEdit.finished_playing}`, {
             method: 'PUT',
             body: JSON.stringify(finishedPlayingVal),
