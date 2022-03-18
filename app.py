@@ -167,7 +167,7 @@ def delete_game_cat(game_categoryID):
 def scores():
     db_connection = db.connect_to_database()
     if request.method == 'GET':
-        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games.name as game_name, Scores.score, Scores.scoreID
+        query = """SELECT CONCAT(Players.first_name, ' ', Players.last_name) AS player_name,  Games.name as game_name, Scores.score, Scores.finished_playing, Scores.scoreID
                     FROM Players
                     JOIN Scores on Players.playerID = Scores.playerID
                     JOIN Games on Games.gameID = Scores.gameID"""
@@ -178,7 +178,7 @@ def scores():
     elif request.method == 'POST':
         form_data = request.get_json()
         print(form_data)
-        query = "INSERT INTO Scores (playerID, gameID, score) VALUES (%s, %s, %s);"
+        query = "INSERT INTO Scores (playerID, gameID, score, finished_playing) VALUES (%s, %s, %s, 0);"
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score']))
         return Response(status=201)
 
@@ -192,9 +192,21 @@ def delete_score(scoreID):
     elif request.method == 'PUT':
         form_data = request.get_json()
         print(form_data)
-        query = "UPDATE Scores SET playerID=%s, gameID=%s, score=%s WHERE scoreID=%s;"
-        db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score'], form_data['scoreID']))
-        return Response(status=200)
+        # for updating but does not include the finished playing checkbox
+        finished_playing = form_data['finished_playing']
+        if len(form_data) > 1:
+            query = "UPDATE Scores SET playerID=%s, gameID=%s, score=%s, finished_playing=%s WHERE scoreID=%s;"
+            if finished_playing == 'on':
+                finished_playing = 1
+            else:
+                finished_playing = 0
+            db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score'], finished_playing, form_data['scoreID']))
+            return Response(status=200)
+        # for updating the finished playing checkbox
+        elif len(form_data == 1):
+            query = "UPDATE Scores SET finished_playing=%s;"
+            db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['finished_playing']))
+            return Response(status=200)
 
 @app.route('/api/games-game-categories', methods=["POST", "GET"])
 def gmaes_game_cat():

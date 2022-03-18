@@ -13,6 +13,7 @@ function ScoresPage({setScoreToEdit}) {
     const [playerID, setPlayerID] = useState('');
     const [gameID, setGameID] = useState('');
     const [score, setScore] = useState('');
+    const [finished_playing, setFinishedPlaying] = useState('');
     
     const history = useHistory();
 

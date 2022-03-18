@@ -42,6 +42,7 @@ CREATE TABLE `Scores` (
     `playerID` int(11) NOT NULL,
     `gameID` int(11) NOT NULL,
     `score` float(24),
+    `finished_playing` tinyint(1),
     PRIMARY KEY (`scoreID`)
 );
 
