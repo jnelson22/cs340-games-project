@@ -6,7 +6,6 @@ export const EditPlayerPage =({playerToEdit}) => {
     const history = useHistory();
     const [first_name, setFirstName] = useState(playerToEdit.first_name);
     const [last_name, setLastName] = useState(playerToEdit.last_name);
-    //const [favorite_game, setFavoriteGame] = useState(playerToEdit.favorite_game);
     const [playerID] = useState(playerToEdit.playerID);
     const [games, setGames] = useState([]);
     const [gameID, setGameID] = useState('');
@@ -35,7 +34,7 @@ export const EditPlayerPage =({playerToEdit}) => {
         }else {
             alert(`failed to edit player, status code=${response.status}`);
         }
-        history.push('/');
+        history.push("/players");
     };
 
     return (

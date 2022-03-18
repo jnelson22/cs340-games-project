@@ -13,7 +13,6 @@ function ScoresPage({setScoreToEdit}) {
     const [playerID, setPlayerID] = useState('');
     const [gameID, setGameID] = useState('');
     const [score, setScore] = useState('');
-    const [finished_playing, setFinishedPlaying] = useState('');
     
     const history = useHistory();
 
@@ -21,7 +20,6 @@ function ScoresPage({setScoreToEdit}) {
         const response = await fetch('/api/scores');
         const data = await response.json();
         setScores(data);
-        console.log(data);
     }
 
     useEffect(() => {
@@ -29,7 +27,6 @@ function ScoresPage({setScoreToEdit}) {
     }, []);
 
     const onDelete = async scoreID => {
-        console.log(scoreID)
         const response = await fetch(`/api/scores/${scoreID}`, { method: 'DELETE' });
         if (response.status === 204) {
             const newScores = scores.filter(m => m.scoreID !== scoreID);
@@ -86,19 +83,6 @@ function ScoresPage({setScoreToEdit}) {
     return (
         <>
             <h1>Scores Page</h1>
-            <table className="table-search">
-                <tr>
-                    <td>
-                        <input type="text" placeholder='Player Name'/>
-                    </td>
-                    <td>
-                        <input type="text" placeholder='Game'/>
-                    </td>
-                    <td>
-                        <button>Search</button>
-                    </td>
-                </tr>
-            </table>
             <br></br>
             <ScoresTable scores={scores} onEdit={onEdit} onDelete={onDelete}/>
             <hr></hr>

@@ -34,7 +34,6 @@ function PlayersPage({setPlayerToEdit}) {
                 'Content-Type': 'application/json'
             },
         });
-        console.log(response)
         if (response.status === 201) {
             alert("Player was added!")
             loadPlayers()
@@ -69,22 +68,6 @@ function PlayersPage({setPlayerToEdit}) {
     return (
         <>
             <h1>Players Page</h1>
-            <table className="table-search">
-                <tr>
-                    <td>
-                        <input type="text" placeholder='First'/>
-                    </td>
-                    <td>
-                        <input type="text" placeholder='Last'/>
-                    </td>
-                    <td>
-                        <input type="text" placeholder='Favorite Game'/>
-                    </td>
-                    <td>
-                        <button>Search</button>
-                    </td>
-                </tr>
-            </table>
             <br></br>
             <PlayersTable players={players} onDelete={onDelete} onEdit={onEdit}/>
             <hr></hr>
