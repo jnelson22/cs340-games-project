@@ -125,6 +125,7 @@ def game_cat():
         category_str = form_data['category'].capitalize()
         try:
             db.execute_query(db_connection=db_connection, query=query, query_params=(category_str,))
+            return Response(status=201)
         except Exception as e:
             if "Duplicate entry" in e.args[1]:
                 print("duplicate key")
