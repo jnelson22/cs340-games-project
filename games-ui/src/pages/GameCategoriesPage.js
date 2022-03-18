@@ -56,7 +56,7 @@ function GameCategoriesPage() {
             <hr></hr>
             <div>
                 <table className="table-edit">
-                    <GameCategoriesTableHead />
+                    <GameCategoriesTableHead input={'add'} />
                     <tbody>
                         <tr className="input-table">
                             <td className="input-table">
@@ -69,7 +69,7 @@ function GameCategoriesPage() {
                         </tr>
                         <tr>
                             <td colSpan= "5">
-                                <button type='submit' className="add-button" onClick={addGameCat}>Add</button>
+                                <button type='submit' className="add-button" onClick={addGameCat}>Add New Game Category</button>
                             </td>
                         </tr>
                     </tbody>
