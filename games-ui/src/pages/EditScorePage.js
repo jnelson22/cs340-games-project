@@ -15,19 +15,8 @@ export const EditScorePage = ({scoreToEdit}) => {
     const [player_name, setPlayerName] = useState(scoreToEdit.player_name);
     const [game_name, setGameName] = useState(scoreToEdit.game_name);
     const [score, setScore] = useState(scoreToEdit.score);
-    //const [finished_playing, setFinishedPlaying] = useState(scoreToEdit.finishedPlaying);
+    const [finished_playing, setFinishedPlaying] = useState(scoreToEdit.finishedPlaying);
     const [scoreID] = useState(scoreToEdit.scoreID);
-
-    //const loadScores = async () => {
-    //    const response = await fetch('/api/scores');
-    //    const data = await response.json();
-    //    setScores(data);
-   //     console.log(data);
-    //}
-
-    //useEffect(() => {
-    //    loadScores();
-    //}, []);
 
     const loadPlayers = async () => {
         const response = await fetch('/api/players');
@@ -50,7 +39,7 @@ export const EditScorePage = ({scoreToEdit}) => {
     }, []);
 
     const editScore = async () => {
-        const editedScore = {playerID, gameID, score, scoreID};
+        const editedScore = {playerID, gameID, score, scoreID, finished_playing};
         const response= await fetch(`api/scores/${scoreToEdit.scoreID}`, {
             method: 'PUT',
             body: JSON.stringify(editedScore),
@@ -64,7 +53,7 @@ export const EditScorePage = ({scoreToEdit}) => {
         }else{
             alert(`failed to edit score, status code=${response.status}`);
         }
-        history.push('/');
+        history.push("/scores");
     };
 
     return (
@@ -82,11 +71,16 @@ export const EditScorePage = ({scoreToEdit}) => {
                         <option value={game.gameID}>{game.name}</option>
                     ))}
                 </select>
+                <input 
+                    type="checkbox" 
+                    checked={score.finished_playing}
+                    onChange={e => setFinishedPlaying(e.target.value)}
+                />
                 <input
                     type="number"
                     //placeholder='Enter Score'
                     value={score}
-                    onChange={e=> setScore(e.target.value)}
+                    onChange={e => setScore(e.target.value)}
                 />
                 <button className="add-button" type='submit' onClick={editScore}>
                     Save

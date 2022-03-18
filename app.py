@@ -172,9 +172,14 @@ def delete_score(scoreID):
         form_data = request.get_json()
         print(form_data)
         # for updating but does not include the finished playing checkbox
+        finished_playing = form_data['finished_playing']
         if len(form_data) > 1:
-            query = "UPDATE Scores SET playerID=%s, gameID=%s, score=%s WHERE scoreID=%s;"
-            db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score'], form_data['scoreID']))
+            query = "UPDATE Scores SET playerID=%s, gameID=%s, score=%s, finished_playing=%s WHERE scoreID=%s;"
+            if finished_playing == 'on':
+                finished_playing = 1
+            else:
+                finished_playing = 0
+            db.execute_query(db_connection=db_connection, query=query, query_params=(form_data['playerID'], form_data['gameID'], form_data['score'], finished_playing, form_data['scoreID']))
             return Response(status=200)
         # for updating the finished playing checkbox
         elif len(form_data == 1):
