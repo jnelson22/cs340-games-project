@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
-import GamesGameCatPage from './GamesGameCatPage';
-import PlayersPage from './PlayersPage';
 
 export const EditScorePage = ({scoreToEdit}) => {
 
     const history = useHistory();
 
-    //const [playerID, setPlayerID] = useState(scoreToEdit.playerID);
     const [players, setPlayers] = useState([]);
     const [games, setGames] = useState([]);
     const [gameID, setGameID] = useState('');

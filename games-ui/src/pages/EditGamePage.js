@@ -12,7 +12,6 @@ export const EditGamePage = ({gameToEdit}) => {
 
     const editGame = async () => {
         const editedGame = { name, min_number_player, max_number_player, gameID };
-        //const response= await fetch('api/games/', {
         const response= await fetch(`/api/games/${gameToEdit.gameID}`, {
             method: 'PUT', 
             body: JSON.stringify(editedGame),
@@ -20,13 +19,12 @@ export const EditGamePage = ({gameToEdit}) => {
                 'Content-Type': 'application/json',
             },
         });
-        console.log(editedGame);
         if(response.status === 200){
             alert('successfully edited game');
-        }else {
+        } else {
             alert(`failed to edit game, status code =${response.status}`);
         }
-        history.push('/');
+        history.push("/games");
     };
 
     return (

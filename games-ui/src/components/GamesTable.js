@@ -1,10 +1,8 @@
 import React from 'react';
 import GamesTableHead from './GamesTableHead';
 import { FiEdit2, FiDelete } from 'react-icons/fi';
-import {useState} from 'react';
 
 function GamesTable ({games, onEdit, onDelete}) {
-    console.log(games)
     
     return (
         <table className="table-container">
